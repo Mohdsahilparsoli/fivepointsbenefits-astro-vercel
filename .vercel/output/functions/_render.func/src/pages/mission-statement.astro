@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { fetchAPI } from "../lib/wordpress";
+
+const Homequery = `query GetPage {
+  page(id: "mission-statement", idType: URI) {
+    title
+    content
+    slug
+    uri
+     seo {
+      title
+      fullHead
+    }
+  }
+}`;
+
+let missionstatement = await fetchAPI(Homequery);
+---
+
+   <BaseLayout title={missionstatement.page.seo.title} fullHead={missionstatement.page.seo.fullHead}>
+  <section class="mission-statement">
+    <div class="container">
+      <div class="statement">
+        <div class="main-titles">
+          <h1 class="fs-60">{missionstatement.page.title}</h1>
+        </div>
+        <div
+          class="main-titles-pera"
+          set:html={missionstatement.page.content}
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

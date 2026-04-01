@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { fetchAPI } from "../lib/wordpress";
+
+const Homequery = `
+query GetPage {
+  page(id: "find-provider", idType: URI) {
+    title
+    content
+    slug
+    uri
+     seo {
+      title
+      fullHead
+    }
+    findProvider {
+      memberId
+      network
+      searchInstructions
+      shortInfo
+      shortInfoMember
+       memberIdProfile {
+        memberProfilePicture {
+          node {
+            id
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+    featuredImage {
+      node {
+        sourceUrl
+        mediaDetails {
+          file
+          filePath
+          height
+          width
+        }
+      }
+    }
+  }
+}
+  `;
+
+let provider = await fetchAPI(Homequery);
+---
+
+   <BaseLayout title={provider.page.seo.title} fullHead={provider.page.seo.fullHead}>
+  <section class="member-sec provider data-flow flow-data">
+    <div class="container">
+      <div class="row gy-4 align-items-center">
+        <div class="col-lg-7">
+          <div
+            class="allabout-memberss fin-provide"
+            set:html={provider.page.content}
+          />
+        </div>
+        <div class="col-lg-5">
+          <div class="image-members">
+            <img
+              src={provider.page.featuredImage.node.sourceUrl}
+              alt={provider.page.title}
+              width="615"
+              height="348"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="memberportal-secc bg-white">
+    <div class="container">
+      <div class="holderebg-here">
+        <div
+          class="center-data"
+          set:html={provider.page.findProvider.network}
+        />
+      </div>
+    </div>
+    <div class="imgaebg content">
+      <div class="container">
+        <div
+          class="main-imageheree"
+          set:html={provider.page.findProvider.shortInfo}
+        />
+      </div>
+    </div>
+
+    <div class="container">
+      <div
+        class="full-content-data"
+        set:html={provider.page.findProvider.searchInstructions}
+      />
+    </div>
+
+    <div class="pdf-flow"></div>
+
+    <div class="container">
+      <div class="find-card" set:html={provider.page.findProvider.memberId} />
+      <div class="logos">
+        {
+          provider.page.findProvider.memberIdProfile.map((curent) => {
+            return (
+              <div class="main-img">
+                <img
+                  src={curent.memberProfilePicture.node.sourceUrl}
+                  alt="YOUR MEMBER ID CARD"
+                />
+              </div>
+            );
+          })
+        }
+      </div>
+      <p class="flow-center">
+        {provider.page.findProvider.shortInfoMember}
+      </p>
+    </div>
+  </section>
+</BaseLayout>
