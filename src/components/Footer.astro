@@ -1,0 +1,186 @@
+---
+import { fetchAPI } from "../lib/wordpress";
+
+const GET_MENU = `
+query GetFullMenu {
+  menu(id: "mainmenu", idType: SLUG) {
+    menuItems(first: 200) {
+      nodes {
+        id
+        label
+        uri
+        parentId
+      }
+    }
+  }
+}
+`;
+
+const data = await fetchAPI(GET_MENU);
+const items = data.menu.menuItems.nodes;
+const footer = await fetchAPI(`query GetAllWidgets {
+  mainSidebar
+}
+`)
+
+/* children finder */
+const getChildren = (parentId) =>
+  items.filter((item) => item.parentId === parentId);
+
+/* menu finder */
+const getItem = (name) =>
+  items.find((i) => i.label.toLowerCase() === name.toLowerCase());
+
+/* recursive html generator */
+function renderMenu(parentId) {
+  const children = getChildren(parentId);
+
+  let html = "";
+
+  children.forEach((item) => {
+    html += `<li>
+      <a href="${item.uri}">${item.label}</a>`;
+
+    const sub = getChildren(item.id);
+
+    if (sub.length > 0) {
+      html += `<ul class="sub-menu">`;
+      html += renderMenu(item.id);
+      html += `</ul>`;
+    }
+
+    html += `</li>`;
+  });
+
+  return html;
+}
+
+const home = getItem("Home");
+const members = getItem("Members");
+const employers = getItem("Employers");
+const college = getItem("College Students");
+const family = getItem("Individuals & Families");
+const provider = getItem("Find a Provider");
+const pharmacy = getItem("Pharmacy and Rx");
+const tele = getItem("Telemedicine");
+---
+
+<footer class="custom-footer">
+  <div class="container">
+    <div class="menu-list-all">
+      <!-- ABOUT -->
+      <div class="menu-list">
+        <h3>About Us</h3>
+        <ul class="sub-menu" set:html={renderMenu(home?.id)} />
+      </div>
+
+      <!-- MEMBERS -->
+      <div class="menu-list">
+        <h3>Members</h3>
+        <ul class="sub-menu" set:html={renderMenu(members?.id)} />
+      </div>
+
+      <!-- EMPLOYERS -->
+      <div class="menu-list">
+        <h3>Employers</h3>
+        <ul class="sub-menu" set:html={renderMenu(employers?.id)} />
+      </div>
+
+      <!-- COLLEGE + FAMILY -->
+      <div class="menu-list">
+        <h3>College Students</h3>
+        <ul class="sub-menu" set:html={renderMenu(college?.id)} />
+
+        <h3>Individuals & Families</h3>
+        <ul class="sub-menu" set:html={renderMenu(family?.id)} />
+      </div>
+
+      <!-- PROVIDERS -->
+      <div class="menu-list supoortline">
+        <h3>Find A Provider</h3>
+        <ul class="sub-menu" set:html={renderMenu(provider?.id)} />
+
+        <h3>Pharmacy And Rx</h3>
+        <ul class="sub-menu" set:html={renderMenu(pharmacy?.id)} />
+
+        <h3>Telemedicine</h3>
+        <ul class="sub-menu" set:html={renderMenu(tele?.id)} />
+      </div>
+    </div>
+  </div>
+  <div set:html={footer.mainSidebar}></div>
+  
+</footer>
+
+
+<div id="google_translate_element" style="display:none;"></div>
+     
+
+<script is:inline>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        includedLanguages: "en,es,zh,ko,hi,mr,ta,te,bn",
+      },
+      "google_translate_element"
+    );
+  }
+</script>
+<script is:inline>
+   const langSelect = document.getElementById("languageSelect");
+
+  langSelect.addEventListener("change", function () {
+    const lang = this.value;
+
+    const googleDropdown = document.querySelector(".goog-te-combo");
+
+    if (googleDropdown) {
+      googleDropdown.value = lang;
+      googleDropdown.dispatchEvent(new Event("change"));
+    }
+  });
+  langSelect.addEventListener("change", function () {
+  localStorage.setItem("lang", this.value);
+});
+
+window.addEventListener("load", () => {
+  const savedLang = localStorage.getItem("lang");
+  if (savedLang) {
+    const googleDropdown = document.querySelector(".goog-te-combo");
+    if (googleDropdown) {
+      googleDropdown.value = savedLang;
+      googleDropdown.dispatchEvent(new Event("change"));
+    }
+  }
+});
+
+$(document).ready(function () {
+  // Menu toggle
+  $(".menu-icon").on("click", function () {
+      $(".all-here").slideToggle();
+  });
+
+  // Mobile menu
+  if ($(window).innerWidth() <= 1200) {
+
+      $(".sub-menu").hide();
+
+      $(".menu-item-has-children").on("click", function (e) {
+          e.stopPropagation();
+          $(this).children(".sub-menu").slideToggle();
+      });
+
+      // prevent default inside submenu
+      $(".sub-menu").on("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+      });
+  }
+});
+</script>
+
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" is:inline></script>
+
+

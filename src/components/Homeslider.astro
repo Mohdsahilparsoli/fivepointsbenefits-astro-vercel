@@ -1,0 +1,54 @@
+---
+import { fetchAPI } from "../lib/wordpress";
+
+const homeslider = `query GetAllPlans {
+homeSliders{
+  nodes{
+    content
+    title
+    homeSliderImage {
+      fieldGroupName
+      homeSliderImg {
+        sliderImg {
+          node {
+            sourceUrl
+                mediaDetails{
+              width
+              height
+            }
+          }
+        }
+      }
+    }
+  }
+}
+}`;
+const Slider = await fetchAPI(homeslider);
+---
+
+{
+  Slider.homeSliders.nodes.map((curent) => {
+    return (
+      <div class="slider-js">
+        <div class="swiper mySwiperthree">
+          <div class="swiper-wrapper">
+            {curent.homeSliderImage.homeSliderImg.map((curentval) => {
+              return (
+                <div class="swiper-slide">
+                  <div class="main-slider-img">
+                    <img src={curentval.sliderImg.node.sourceUrl} alt={curent.title} width={curentval.sliderImg.node.mediaDetails.width} height={curentval.sliderImg.node.mediaDetails.height}/>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div class="top-section-data">
+          <div set:html={curent.content} style="background-color: transparent;" />
+        </div>
+        top-section-data
+      </div>
+    );
+  })
+}

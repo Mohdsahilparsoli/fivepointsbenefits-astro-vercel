@@ -1,0 +1,71 @@
+---
+import { fetchAPI } from "../lib/wordpress";
+
+const plans = `query GetAllPlans {
+  ourPlans {
+    nodes {
+      title
+      slug
+      excerpt
+      featuredImage {
+        node {
+          sourceUrl
+          mediaDetails {
+            width
+            height
+          }
+        }
+      }
+    }
+  }
+}`;
+
+const res = await fetchAPI(plans);
+const plansData = res.ourPlans.nodes || [];
+
+---
+
+<div class="plans-grid">
+  <div class="swiper mySwipercardsliders">
+    <div class="swiper-wrapper">
+      {
+        plansData.map((plan) => (
+          <div class="swiper-slide">
+            <div class="plan-card">
+              <div class="plan-img">
+                <a href={`/${plan.slug}`}>
+                  <img
+                    src={plan.featuredImage?.node?.sourceUrl}
+                    alt={plan.title}
+                    width={plan.featuredImage?.node?.mediaDetails?.width}
+                    height={plan.featuredImage?.node?.mediaDetails?.height}
+                  />
+                </a>
+              </div>
+
+              <div class="plan-data" style="min-height: 350px;">
+                <div>
+                  <h3 class="fs-25">
+                    <a href={`/${plan.slug}`}>{plan.title}</a>
+                  </h3>
+
+                  <div set:html={plan.excerpt} />
+                </div>
+
+                <div class="button-card">
+                  <a href={`/${plan.slug}`} class="c-btn">
+                    Explore Plans
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="custom-page">
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</div>

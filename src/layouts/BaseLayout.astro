@@ -1,0 +1,62 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { title, fullHead } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} fullHeaddata={fullHead} />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Global Scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+      is:inline></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      is:inline></script>
+
+    <script is:inline>
+      $(document).ready(function () {
+        $(".menu-icon").on("click", function () {
+          $(".all-here").slideToggle();
+        });
+
+        if ($(window).innerWidth() <= 1200) {
+          $(".sub-menu").hide();
+
+          $(".menu-item-has-children").on("click", function (e) {
+            e.stopPropagation();
+            $(this).children(".sub-menu").slideToggle();
+          });
+
+          $(".sub-menu").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          });
+        }
+      });
+    </script>
+
+    <slot name="scripts" />
+  </body>
+</html>

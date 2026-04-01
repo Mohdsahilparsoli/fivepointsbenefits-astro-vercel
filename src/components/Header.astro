@@ -1,0 +1,197 @@
+---
+import { fetchAPI } from "../lib/wordpress";
+
+/* ================================
+   GET FULL MENU
+================================ */
+const GET_FULL_MENU = `
+query GetFullMenu {
+  menu(id: "mainmenu", idType: SLUG) {
+    menuItems(first: 200) {
+      nodes {
+        id
+        label
+        uri
+        parentId
+      }
+    }
+  }
+  siteLogo {
+    sourceUrl
+    altText
+  }
+}
+`;
+
+/* ================================
+   FETCH DATA
+================================ */
+const data = await fetchAPI(GET_FULL_MENU);
+/* ================================
+   EXTRACT MENU ITEMS
+================================ */
+const allMenuItems = data?.menu?.menuItems?.nodes || [];
+
+/* ================================
+   BUILD TREE FUNCTION (RECURSIVE)
+================================ */
+function buildMenuTree(items, parentId = null) {
+  return items
+    .filter((item) => item.parentId === parentId)
+    .map((item) => ({
+      id: item.id,
+      label: item.label,
+      uri: item.uri,
+      parentId: item.parentId,
+      children: buildMenuTree(items, item.id),
+    }));
+}
+
+/* ================================
+   FINAL TREE
+================================ */
+const menuTree = buildMenuTree(allMenuItems);
+
+/* ================================
+   LOGO
+================================ */
+const siteLogo = data?.siteLogo || null;
+
+/* ================================
+   EXPORT OR USE
+================================ */
+
+---
+
+<header class="custom-header">
+  <div class="sticky">
+    <div class="container">
+      <div class="right-value">
+        <ul>
+          <li class="lang">
+            <select id="languageSelect">
+              <option value="">Choose Your Language</option>
+              <!-- Global Languages -->
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="zh">Chinese</option>
+              <option value="ko">Korean</option>
+              <!-- Indian Languages -->
+              <option value="hi">Hindi</option>
+              <option value="mr">Marathi</option>
+              <option value="ta">Tamil</option>
+              <option value="te">Telugu</option>
+              <option value="bn">Bengali</option>
+            </select>
+          </li>
+        </ul>
+      </div>
+      <div class="right-value">
+        <ul>
+          <li><a href="/portal" title="Member Login">Member Login</a></li>
+          <li><a href="/portal" title="Provider Login">Provider Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-header">
+    <div class="container">
+      <div class="grid-bottom">
+        <div class="mobile-grid">
+          <div class="main-logo">
+            <a href="/"
+              ><img
+                src={siteLogo.sourceUrl}
+                alt="HarcoSemco"
+                width="195"
+                height="88"
+              /></a
+            >
+          </div>
+          <div class="main-menu-data">
+            
+            <div class="menu-icon">
+            <i class="fa-solid fa-bars"></i>
+            </div>
+          </div>
+        </div>
+        <div class="all-here">
+          <ul class="bottom-navlists zindex">
+            {
+              menuTree.map((item) => (
+              
+                <li
+                  class={
+                    item.children.length > 0 ? "menu-item-has-children" : ""
+                  }
+                >
+                  <a href={item.uri} title={item.label}>
+                    {item.label}
+                  </a>
+
+                  {/* LEVEL 2 */}
+                  {item.children.length > 0 && (
+                    <ul class="sub-menu">
+                      {item.children.map((child) => (
+                        <li
+                          class={
+                            child.children.length > 0
+                              ? "menu-item-has-children"
+                              : ""
+                          }
+                        >
+                          <a href={child.uri} title={child.label}>
+                            {child.label}
+                          </a>
+
+                          {/* LEVEL 3 */}
+                          {child.children.length > 0 && (
+                            <ul class="sub-menu">
+                              {child.children.map((grandChild) => (
+                                <li
+                                  class={
+                                    grandChild.children.length > 0
+                                      ? "menu-item-has-children"
+                                      : ""
+                                  }
+                                >
+                                  <a href={grandChild.uri} title={grandChild.label}>
+                                    {grandChild.label}
+                                  </a>
+
+                                  {/* LEVEL 4 */}
+                                  {grandChild.children.length > 0 && (
+                                    <ul class="sub-menu">
+                                      {grandChild.children.map(
+                                        (greatGrandChild) => (
+                                          <li>
+                                            <a
+                                              href={greatGrandChild.uri}
+                                              title={greatGrandChild.label}
+                                            >
+                                              {greatGrandChild.label}
+                                            </a>
+                                          </li>
+                                        ),
+                                      )}
+                                    </ul>
+                                  )}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mt"></div>
