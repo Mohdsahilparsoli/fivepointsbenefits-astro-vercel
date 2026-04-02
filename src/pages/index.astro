@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Homeslider from "../components/Homeslider.astro";
 import Plans from "../components/Plans.astro";
 import { fetchAPI } from "../lib/wordpress";
+import { Image } from "astro:assets";
 
 const Homequery = `query GetHomePage {
   page(id: "home", idType: URI) {
@@ -80,40 +81,47 @@ let Homepageres = await fetchAPI(Homequery);
   </section>
 
   <!-- PROVIDER -->
-  <section class="request-apointment">
-    <div class="container">
-      <div class="bottom-data">
-        <div class="bottom-img">
-          <img
-            src={Homepageres.page.homePage.provideImage.node.sourceUrl}
-            alt={Homepageres.page.homePage.mainTitleProvider}
-            width="600"
-            height="368"
-          />
-        </div>
+ <section class="request-apointment">
+  <div class="container">
+    <div class="bottom-data">
+      <div class="bottom-img">
 
-        <div class="bottom-content">
-          <span class="section-tag">
-            {Homepageres.page.homePage.mainTitleProvider}
-          </span>
+        <Image
+          src={Homepageres.page.homePage.provideImage.node.sourceUrl}
+          alt={Homepageres.page.homePage.mainTitleProvider}
+          width={600}
+          height={368}
+          format="avif"
+          quality={80}
+          loading="lazy"
+          decoding="async"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
 
-          <div class="datagridsss">
-            {
-              Homepageres.page.homePage.providerFields.map((item) => (
-                <div class="main-dataa">
-                  <h3 class="fs-30">{item.title}</h3>
-                  <p>{item.provideContent}</p>
-                  <a href={item.link} class="c-btn">
-                    <span>{item.cta}</span>
-                  </a>
-                </div>
-              ))
-            }
-          </div>
+      </div>
+
+      <div class="bottom-content">
+        <span class="section-tag">
+          {Homepageres.page.homePage.mainTitleProvider}
+        </span>
+
+        <div class="datagridsss">
+          {
+            Homepageres.page.homePage.providerFields.map((item) => (
+              <div class="main-dataa">
+                <h3 class="fs-30">{item.title}</h3>
+                <p>{item.provideContent}</p>
+                <a href={item.link} class="c-btn">
+                  <span>{item.cta}</span>
+                </a>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- PAGE SPECIFIC SCRIPTS -->
   <script

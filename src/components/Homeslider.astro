@@ -1,5 +1,6 @@
 ---
 import { fetchAPI } from "../lib/wordpress";
+import { Image } from "astro:assets";
 
 const homeslider = `query GetAllPlans {
 homeSliders{
@@ -27,16 +28,29 @@ const Slider = await fetchAPI(homeslider);
 ---
 
 {
-  Slider.homeSliders.nodes.map((curent) => {
+  Slider.homeSliders.nodes.map((curent, index) => {
     return (
       <div class="slider-js">
         <div class="swiper mySwiperthree">
           <div class="swiper-wrapper">
-            {curent.homeSliderImage.homeSliderImg.map((curentval) => {
+            {curent.homeSliderImage.homeSliderImg.map((curentval, i) => {
+              const img = curentval.sliderImg.node;
+
               return (
                 <div class="swiper-slide">
                   <div class="main-slider-img">
-                    <img src={curentval.sliderImg.node.sourceUrl} alt={curent.title} width={curentval.sliderImg.node.mediaDetails.width} height={curentval.sliderImg.node.mediaDetails.height}/>
+                    
+                    <Image
+                      src={img.sourceUrl}
+                      alt={curent.title}
+                      width={img.mediaDetails.width}
+                      height={img.mediaDetails.height}
+                      format="avif"
+                      quality={80}
+                      loading={index === 0 && i === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                    />
+
                   </div>
                 </div>
               );
@@ -47,7 +61,6 @@ const Slider = await fetchAPI(homeslider);
         <div class="top-section-data">
           <div set:html={curent.content} style="background-color: transparent;" />
         </div>
-        top-section-data
       </div>
     );
   })
