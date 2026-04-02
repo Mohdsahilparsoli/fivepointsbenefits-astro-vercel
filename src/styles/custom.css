@@ -3484,3 +3484,15 @@ section.optum-rx-welcome br {
     max-width: 195px;
     width: 100%;
 }
+
+.bootm-ligals.border-0.mt-0.main-bootm .container ul li img {
+  max-width: 20px;
+  opacity: 0.8;
+  transition: 0.3s ease-in;
+}
+.bootm-ligals.border-0.mt-0.main-bootm .container ul li:hover img {
+  opacity: 1;
+}
+.menu-icon img {
+    filter: invert(1);
+}
