@@ -8,7 +8,6 @@ query GetAllPlans {
     nodes {
       content
       title
-      date
       homeSliderImage {
         homeSliderImg {
           sliderImg {
@@ -40,35 +39,52 @@ const Slider = await fetchAPI(homeslider);
       <div class="slider-js">
         <div class="swiper mySwiperthree">
           <div class="swiper-wrapper">
+
             {curent.homeSliderImage.homeSliderImg.map((curentval, i) => {
               const img = curentval.sliderImg.node;
+
+              // 👇 responsive sizes (WordPress se)
+              const small = img.mediaDetails.sizes?.find(s => s.name === "medium")?.sourceUrl || img.sourceUrl;
+              const large = img.mediaDetails.sizes?.find(s => s.name === "large")?.sourceUrl || img.sourceUrl;
+
+              const isLCP = index === 0 && i === 0;
 
               return (
                 <div class="swiper-slide">
                   <div class="main-slider-img">
-                    
-                    <Image
-                      src={img.sourceUrl}
+
+                    <img
+                      src={large}
+                      srcset={`${small} 768w, ${large} 1200w`}
+                      sizes="(max-width: 768px) 100vw, 1200px"
                       alt={curent.title}
                       width={img.mediaDetails.width}
                       height={img.mediaDetails.height}
-                      format="avif"
-                      quality={80}
-                      loading={index === 0 && i === 0 ? "eager" : "lazy"}
+                      
+                      loading={isLCP ? "eager" : "lazy"}
+                      fetchpriority={isLCP ? "high" : "auto"}
                       decoding="async"
+                      style="width:100%; height:auto;"
                     />
 
                   </div>
                 </div>
               );
             })}
+
           </div>
         </div>
 
         <div class="top-section-data">
-          <div set:html={curent.content} style="background-color: transparent;" />
+          <div set:html={curent.content} />
         </div>
       </div>
     );
   })
 }
+
+<style>
+  .main-slider-img img{
+    height: 100% !important;
+  }
+</style>

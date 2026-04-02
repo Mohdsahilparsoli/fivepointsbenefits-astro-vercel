@@ -1,6 +1,5 @@
 ---
 import { fetchAPI } from "../lib/wordpress";
-import { Image } from "astro:assets";
 
 const plans = `query GetAllPlans {
   ourPlans {
@@ -14,6 +13,11 @@ const plans = `query GetAllPlans {
           mediaDetails {
             width
             height
+            sizes {
+              name
+              sourceUrl
+              width
+            }
           }
         }
       }
@@ -28,27 +32,34 @@ const plansData = res.ourPlans.nodes || [];
 <div class="plans-grid">
   <div class="swiper mySwipercardsliders">
     <div class="swiper-wrapper">
+
       {
-        plansData.map((plan, index) => {
+        plansData.map((plan) => {
           const img = plan.featuredImage?.node;
+
+          // ✅ responsive sizes from WP
+          const small = img?.mediaDetails?.sizes?.find(s => s.name === "medium")?.sourceUrl || img?.sourceUrl;
+          const large = img?.mediaDetails?.sizes?.find(s => s.name === "large")?.sourceUrl || img?.sourceUrl;
 
           return (
             <div class="swiper-slide">
               <div class="plan-card">
+
                 <div class="plan-img">
                   <a href={`/${plan.slug}`}>
 
                     {img && (
-                      <Image
-                        src={img.sourceUrl}
+                      <img
+                        src={large}
+                        srcset={`${small} 400w, ${large} 800w`}
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         alt={plan.title}
                         width={img.mediaDetails?.width || 400}
                         height={img.mediaDetails?.height || 300}
-                        format="avif"
-                        quality={80}
-                        loading={index === 0 ? "eager" : "lazy"}
+                        
+                        loading="lazy"
                         decoding="async"
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        style="width:100%; height:auto;"
                       />
                     )}
 
@@ -70,11 +81,13 @@ const plansData = res.ourPlans.nodes || [];
                     </a>
                   </div>
                 </div>
+
               </div>
             </div>
           );
         })
       }
+
     </div>
 
     <div class="custom-page">
@@ -82,3 +95,9 @@ const plansData = res.ourPlans.nodes || [];
     </div>
   </div>
 </div>
+
+<style>
+  .plan-img img {
+    height: 100% !important;
+  }
+</style>
