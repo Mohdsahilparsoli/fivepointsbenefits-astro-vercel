@@ -475,9 +475,6 @@ ul.bottom-navlists .sub-menu li {
   opacity: 1;
 }
 
-.main-logo img {
-  max-width: 120px;
-}
 
 .menu-icon {
   display: none;
@@ -3481,4 +3478,9 @@ section.optum-rx-welcome br {
 #submitBtn {
   background-color: #007bff;
   color: #fff;
+}
+
+.mobile-grid {
+    max-width: 195px;
+    width: 100%;
 }

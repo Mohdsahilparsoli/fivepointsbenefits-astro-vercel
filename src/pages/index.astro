@@ -36,6 +36,7 @@ const Homequery = `query GetHomePage {
 }`;
 
 let Homepageres = await fetchAPI(Homequery);
+
 ---
 
    <BaseLayout title={Homepageres.page.seo.title} fullHead={Homepageres.page.seo.fullHead}>
@@ -71,6 +72,8 @@ let Homepageres = await fetchAPI(Homequery);
           <img
             src={Homepageres.page.homePage.provideImage.node.sourceUrl}
             alt={Homepageres.page.homePage.mainTitleProvider}
+            width="600"
+            height="368"
           />
         </div>
 
