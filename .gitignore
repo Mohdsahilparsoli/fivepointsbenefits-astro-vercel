@@ -2,7 +2,7 @@
 dist/
 # generated types
 .astro/
-# npm install @astrojs/vercel --save-dev
+
 # dependencies
 node_modules/
 
