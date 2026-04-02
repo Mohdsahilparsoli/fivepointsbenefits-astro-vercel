@@ -1,10 +1,6 @@
 ---
-// CSS
-// import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/bootstrap.min.css";
-import "../styles/custom.css";
-import "../styles/h.css";
-import "../styles/responsive.css";
+// ✅ CSS (Astro handle karega – SAFE & OPTIMIZED)
+import "../styles/main.css";
 
 import type { ImageMetadata } from "astro";
 import FallbackImage from "../assets/blog-placeholder-1.jpg";
@@ -31,7 +27,7 @@ const { title, fullHeaddata, image = FallbackImage } = Astro.props;
 <!-- ✅ CANONICAL -->
 <link rel="canonical" href={canonicalURL} />
 
-<!-- ✅ YOAST SEO HEAD (MAIN POWER) -->
+<!-- ✅ YOAST SEO -->
 {fullHeaddata && <Fragment set:html={fullHeaddata} />}
 
 <!-- ✅ FAVICON -->
@@ -45,11 +41,17 @@ const { title, fullHeaddata, image = FallbackImage } = Astro.props;
   href={new URL("rss.xml", Astro.site)}
 />
 
-<!-- ✅ GOOGLE FONTS -->
-<!-- Preconnect -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- 🔥 FONT OPTIMIZATION (NON-BLOCKING) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link
-  href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800&display=swap"
+  rel="preload"
+  as="style"
+  onload="this.rel='stylesheet'"
 />
+
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800&display=swap" rel="stylesheet">
+</noscript>
