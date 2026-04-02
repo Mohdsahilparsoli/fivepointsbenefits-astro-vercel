@@ -36,10 +36,25 @@ const Homequery = `query GetHomePage {
 }`;
 
 let Homepageres = await fetchAPI(Homequery);
-
 ---
 
-   <BaseLayout title={Homepageres.page.seo.title} fullHead={Homepageres.page.seo.fullHead}>
+<BaseLayout
+  title={Homepageres.page.seo.title}
+  fullHead={Homepageres.page.seo.fullHead}
+>
+  <link
+    rel="preload"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+  </noscript>
+
   <!-- HERO -->
   <section class="hero-section">
     <div class="three-slider">
@@ -101,7 +116,9 @@ let Homepageres = await fetchAPI(Homequery);
   </section>
 
   <!-- PAGE SPECIFIC SCRIPTS -->
-
+  <script
+    src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    is:inline></script>
   <Fragment slot="scripts">
     <script is:inline>
       new Swiper(".mySwipercardsliders", {
