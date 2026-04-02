@@ -2,27 +2,34 @@
 import { fetchAPI } from "../lib/wordpress";
 import { Image } from "astro:assets";
 
-const homeslider = `query GetAllPlans {
-homeSliders{
-  nodes{
-    content
-    title
-    homeSliderImage {
-      fieldGroupName
-      homeSliderImg {
-        sliderImg {
-          node {
-            sourceUrl
-                mediaDetails{
-              width
-              height
+const homeslider = `
+query GetAllPlans {
+  homeSliders(first: 10, where: { orderby: { field: DATE, order: DESC } }) {
+    nodes {
+      content
+      title
+      date
+      homeSliderImage {
+        homeSliderImg {
+          sliderImg {
+            node {
+              sourceUrl
+              mediaDetails {
+                width
+                height
+                sizes {
+                  name
+                  sourceUrl
+                  width
+                  height
+                }
+              }
             }
           }
         }
       }
     }
   }
-}
 }`;
 const Slider = await fetchAPI(homeslider);
 ---
