@@ -1,7 +1,7 @@
 ---
 // CSS
 // import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/bootstrap.min.css"
+import "../styles/bootstrap.min.css";
 import "../styles/custom.css";
 import "../styles/h.css";
 import "../styles/responsive.css";
@@ -32,9 +32,7 @@ const { title, fullHeaddata, image = FallbackImage } = Astro.props;
 <link rel="canonical" href={canonicalURL} />
 
 <!-- ✅ YOAST SEO HEAD (MAIN POWER) -->
-{fullHeaddata && (
-  <Fragment set:html={fullHeaddata} />
-)}
+{fullHeaddata && <Fragment set:html={fullHeaddata} />}
 
 <!-- ✅ FAVICON -->
 <link rel="icon" href="/favicon.jpg" />
@@ -49,10 +47,9 @@ const { title, fullHeaddata, image = FallbackImage } = Astro.props;
 
 <!-- ✅ GOOGLE FONTS -->
 <!-- Preconnect -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet">
-
-
-
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  rel="stylesheet"
+/>
