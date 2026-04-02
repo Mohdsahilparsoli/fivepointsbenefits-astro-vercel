@@ -74,6 +74,7 @@ let Homepageres = await fetchAPI(Homequery);
             alt={Homepageres.page.homePage.mainTitleProvider}
             width="600"
             height="368"
+            loading="lazy"
           />
         </div>
 
@@ -101,6 +102,9 @@ let Homepageres = await fetchAPI(Homequery);
   </section>
 
   <!-- PAGE SPECIFIC SCRIPTS -->
+     <script
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+      is:inline></script>
   <Fragment slot="scripts">
     <script is:inline>
       new Swiper(".mySwipercardsliders", {
