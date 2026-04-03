@@ -115,8 +115,21 @@ const tele = getItem("Telemedicine");
 
 <div id="google_translate_element" style="display:none;"></div>
      
+<script  is:inline>
+  let googleTranslateLoaded = false;
 
-<script is:inline>
+  function loadGoogleTranslate() {
+    if (googleTranslateLoaded) return;
+
+    const script = document.createElement("script");
+    script.src =
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.async = true;
+    document.body.appendChild(script);
+
+    googleTranslateLoaded = true;
+  }
+
   function googleTranslateElementInit() {
     new google.translate.TranslateElement(
       {
@@ -125,35 +138,47 @@ const tele = getItem("Telemedicine");
       },
       "google_translate_element"
     );
+
+    applySavedLanguage();
   }
-</script>
-<script is:inline>
-   const langSelect = document.getElementById("languageSelect");
 
-  langSelect.addEventListener("change", function () {
-    const lang = this.value;
+  function applySavedLanguage() {
+    const savedLang = localStorage.getItem("lang");
+    const interval = setInterval(() => {
+      const dropdown = document.querySelector(".goog-te-combo");
 
-    const googleDropdown = document.querySelector(".goog-te-combo");
+      if (dropdown && savedLang) {
+        dropdown.value = savedLang;
+        dropdown.dispatchEvent(new Event("change"));
+        clearInterval(interval);
+      }
+    }, 500);
+  }
 
-    if (googleDropdown) {
-      googleDropdown.value = lang;
-      googleDropdown.dispatchEvent(new Event("change"));
-    }
+  document.addEventListener("DOMContentLoaded", () => {
+    const langSelect = document.getElementById("languageSelect");
+
+    if (!langSelect) return;
+
+    // Load script only when user interacts
+    langSelect.addEventListener("focus", loadGoogleTranslate);
+
+    langSelect.addEventListener("change", function () {
+      const lang = this.value;
+      localStorage.setItem("lang", lang);
+
+      const dropdown = document.querySelector(".goog-te-combo");
+
+      if (dropdown) {
+        dropdown.value = lang;
+        dropdown.dispatchEvent(new Event("change"));
+      }
+    });
   });
-  langSelect.addEventListener("change", function () {
-  localStorage.setItem("lang", this.value);
-});
+</script>
 
-window.addEventListener("load", () => {
-  const savedLang = localStorage.getItem("lang");
-  if (savedLang) {
-    const googleDropdown = document.querySelector(".goog-te-combo");
-    if (googleDropdown) {
-      googleDropdown.value = savedLang;
-      googleDropdown.dispatchEvent(new Event("change"));
-    }
-  }
-});
+<script is:inline>
+  
 
 $(document).ready(function () {
   // Menu toggle
@@ -181,6 +206,5 @@ $(document).ready(function () {
 </script>
 
 
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" is:inline></script>
 
 
