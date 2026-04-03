@@ -1,6 +1,5 @@
 ---
 import { fetchAPI } from "../lib/wordpress";
-import { Image } from "astro:assets";
 
 const homeslider = `
 query GetAllPlans {
@@ -30,33 +29,30 @@ query GetAllPlans {
     }
   }
 }`;
+
 const Slider = await fetchAPI(homeslider);
+
 const sortedSliders = Slider.homeSliders.nodes.sort((a, b) => {
   const order = {
     "For Employer Groups": 1,
     "For College Students": 2,
     "For Individuals & Families": 3
   };
-
   return order[a.title] - order[b.title];
 });
-
-
-
 ---
-
 
 {
   sortedSliders.map((curent, index) => {
     return (
       <div class="slider-js">
+        
         <div class="swiper mySwiperthree">
           <div class="swiper-wrapper">
 
             {curent.homeSliderImage.homeSliderImg.map((curentval, i) => {
               const img = curentval.sliderImg.node;
 
-              // 👇 responsive sizes (WordPress se)
               const small = img.mediaDetails.sizes?.find(s => s.name === "medium")?.sourceUrl || img.sourceUrl;
               const large = img.mediaDetails.sizes?.find(s => s.name === "large")?.sourceUrl || img.sourceUrl;
 
@@ -68,15 +64,21 @@ const sortedSliders = Slider.homeSliders.nodes.sort((a, b) => {
 
                     <img
                       src={large}
-                      srcset={`${small} 768w, ${large} 1200w`}
-                      sizes="(max-width: 768px) 100vw, 1200px"
+                      srcset={`
+                        ${small} 480w,
+                        ${large} 1024w,
+                        ${img.sourceUrl} 1600w
+                      `}
+                      sizes="(max-width: 768px) 100vw, 800px"
+
                       alt={curent.title}
                       width={img.mediaDetails.width}
                       height={img.mediaDetails.height}
-                      
+
                       loading={isLCP ? "eager" : "lazy"}
                       fetchpriority={isLCP ? "high" : "auto"}
                       decoding="async"
+
                       style="width:100%; height:auto;"
                     />
 
@@ -91,13 +93,8 @@ const sortedSliders = Slider.homeSliders.nodes.sort((a, b) => {
         <div class="top-section-data">
           <div set:html={curent.content} />
         </div>
+
       </div>
     );
   })
 }
-
-<style>
-  .main-slider-img img{
-    height: 100% !important;
-  }
-</style>
