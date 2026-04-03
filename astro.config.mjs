@@ -3,11 +3,13 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import compress from '@playform/compress';
+import netlify from '@astrojs/netlify';
 
 export default defineConfig({
   // ✅ Correct live domain (IMPORTANT for SEO + sitemap)
   site: 'https://fivepointsbenefits-astro-vercel.vercel.app/',
-
+output: 'server',
+  adapter: netlify(),
   trailingSlash: 'ignore',
 
   integrations: [
