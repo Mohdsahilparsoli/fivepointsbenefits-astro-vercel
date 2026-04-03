@@ -5,6 +5,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 
 // 1. This function is MANDATORY for dynamic routes in Astro.
 // It tells Astro to create a page for 'isaac-belbel'
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, s-maxage=120, stale-while-revalidate=30'
+);
+
 export async function getStaticPaths() {
   return [
     { params: { slug: "isaac-belbel" } },

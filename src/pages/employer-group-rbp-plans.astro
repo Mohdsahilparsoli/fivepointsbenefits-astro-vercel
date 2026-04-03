@@ -3,6 +3,11 @@
 import { fetchAPI } from "../lib/wordpress";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, s-maxage=120, stale-while-revalidate=30'
+);
+
 const Homequery = `query GetPage {
   page(id: "employer-group-rbp", idType: URI) {
     title

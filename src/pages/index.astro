@@ -5,6 +5,11 @@ import Plans from "../components/Plans.astro";
 import { fetchAPI } from "../lib/wordpress";
 import { Image } from "astro:assets";
 
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, s-maxage=120, stale-while-revalidate=30'
+);
+
 const Homequery = `query GetHomePage {
   page(id: "home", idType: URI) {
    seo {
