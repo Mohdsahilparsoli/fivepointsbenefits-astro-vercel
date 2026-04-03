@@ -31,10 +31,23 @@ query GetAllPlans {
   }
 }`;
 const Slider = await fetchAPI(homeslider);
+const sortedSliders = Slider.homeSliders.nodes.sort((a, b) => {
+  const order = {
+    "For Employer Groups": 1,
+    "For College Students": 2,
+    "For Individuals & Families": 3
+  };
+
+  return order[a.title] - order[b.title];
+});
+
+
+
 ---
 
+
 {
-  Slider.homeSliders.nodes.map((curent, index) => {
+  sortedSliders.map((curent, index) => {
     return (
       <div class="slider-js">
         <div class="swiper mySwiperthree">

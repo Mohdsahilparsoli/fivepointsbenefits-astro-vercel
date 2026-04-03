@@ -2,11 +2,15 @@ const API_URL = "https://web.ogrelogicsolutions.com/fivepointsbenefits-astro/gra
 
 
 export async function fetchAPI(query) {
-  const response = await fetch(API_URL, {
+
+
+    const response = await fetch(API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Cache-Control": "no-cache"
     },
+    cache: "no-store",
     body: JSON.stringify({
       query
     }),
