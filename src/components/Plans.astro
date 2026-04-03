@@ -26,7 +26,16 @@ const plans = `query GetAllPlans {
 }`;
 
 const res = await fetchAPI(plans);
-const plansData = res.ourPlans.nodes || [];
+
+const plansData = (res.ourPlans.nodes || []).sort((a, b) => {
+  const order = {
+    "employer group plans": 1,
+    "college student plans": 2,
+    "individual & family plans": 3
+  };
+
+  return (order[a.title.toLowerCase()] || 99) - (order[b.title.toLowerCase()] || 99);
+});
 ---
 
 <div class="plans-grid">
@@ -66,7 +75,7 @@ const plansData = res.ourPlans.nodes || [];
                   </a>
                 </div>
 
-                <div class="plan-data" style="min-height: 250px;">
+                <div class="plan-data" style="min-height: 260px;">
                   <div>
                     <h3 class="fs-25">
                       <a href={`/${plan.slug}`}>{plan.title}</a>
@@ -96,8 +105,3 @@ const plansData = res.ourPlans.nodes || [];
   </div>
 </div>
 
-<style>
-  .plan-img img {
-    height: 100% !important;
-  }
-</style>

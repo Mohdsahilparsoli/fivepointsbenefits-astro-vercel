@@ -1343,7 +1343,6 @@ ul.bottom-navlists .sub-menu li a {
 }
 .plan-img {
   width: 100%;
-  height: 350px;
 }
 .plan-card h3 {
   line-height: normal;
@@ -1375,6 +1374,10 @@ section.memberportal-secc.bg-white h2.fs-40.text-blue-data a {
 }
 p br{
     display: none;
+}
+
+section.shoupourplans-sec.section-padding{
+  padding-top: 0px;
 }
 .plan-data {
   padding: 20px;
@@ -2752,7 +2755,7 @@ section.member-sec.provider .fs-60 {
 }
 .inputfeilds .input,
 .links-data .pdf {
-  max-width: 300px;
+  max-width: 320px;
   width: 100%;
 }
 .inputfeilds .input input {
@@ -3319,6 +3322,7 @@ section.memberportal-secc.bg-white.flow .main-finder-form {
   max-width: 450px;
   width: 100%;
   margin: 60px auto 0;
+  font-size: var(--fs-30);
 }
 .buttons-center a {
   display: block;
@@ -3377,7 +3381,7 @@ section.memberportal-secc.bg-white.flow .main-finder-form {
   padding-top: 50px;
 }
 .butns a {
-  padding: 20px 30px;
+  padding: 20px 10px;
   border-radius: 50px;
   color: #fff;
   font-weight: 700;
@@ -3605,12 +3609,26 @@ section.memberportal-secc {
 }
 .reconixe-holders p a {
   text-decoration: underline;
+  font-style: italic;
 }
 .textplans-mainsss .fs-40 {
   padding-bottom: 0;
 }
 .allaboutgroups p {
   font-weight: 400;
+  font-style: italic;
+}
+.shopaboutgriops {
+    padding-top: 100px;
+}
+.last-dataaa{
+  margin-top: 15px;
+}
+.buttons-center{
+  padding-bottom: 70px;
+}
+.reconixe-holders .fs-40 b,
+.reconixe-holders .fs-40{
   font-style: italic;
 }
 @media (max-width: 1400px) {
@@ -4003,6 +4021,18 @@ section.memberportal-secc {
   .plan-img {
     height: 300px;
   }
+  .shopaboutgriops{
+    padding-top: 50px;
+  }
+  .buttons-center h3{
+    margin-top: 0px;
+  }
+  .plans-gridholders{
+    gap: 40px;
+  }
+  .buttons-center{
+    padding-bottom: 50px;
+  }
 }
 @media (max-width: 1400px) {
   :root {
@@ -4245,6 +4275,18 @@ section.memberportal-secc {
   }
   .main-logo {
     margin: 0;
+  }
+  .shopaboutgriops{
+    padding-top: 30px;
+  }
+  .last-dataaa{
+    margin-top: 10px;
+  }
+   .buttons-center{
+    padding-bottom: 40px;
+  }
+  .reconixe-holders .fs-40{
+    margin-bottom: 10px;
   }
 }
 @media (max-width: 1200px) {
@@ -4505,6 +4547,9 @@ section.memberportal-secc {
   .plans-gridholders {
     gap: 30px !important;
   }
+  .buttons-center{
+    padding-bottom: 30px;
+  }
 }
 @media (max-width: 995px) {
   .sticky .container {
@@ -4745,6 +4790,12 @@ section.memberportal-secc {
   }
   .grid-sytem {
     justify-content: center;
+  }
+  .plans-gridholders{
+    padding-top: 30px !important;
+  }
+  .buttons-center a{
+    padding: 15px 30px;
   }
 }
 @media (max-width: 768px) {
