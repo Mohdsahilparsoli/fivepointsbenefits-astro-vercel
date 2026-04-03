@@ -1,13 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import { fetchAPI } from "../lib/wordpress";
-
-
-Astro.response.headers.set(
-  'Cache-Control',
-  'public, s-maxage=120, stale-while-revalidate=30'
-);
 
 const Homequery = `
 query GetPage {
@@ -16,6 +9,10 @@ query GetPage {
     content
     slug
     uri
+     seo {
+      title
+      fullHead
+    }
   }
 }
 `;
@@ -23,7 +20,8 @@ query GetPage {
 let missionstatement = await fetchAPI(Homequery);
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+
+    <BaseLayout title={missionstatement.page.seo.title} fullHead={missionstatement.page.seo.fullHead}>
   <section class="contact-section">
     <div class="container">
       <div class="contain-info">
@@ -49,16 +47,17 @@ let missionstatement = await fetchAPI(Homequery);
             <input type="hidden" name="_wpcf7_version" value="5.8" />
 
             <label>First name</label>
-            <input type="text" name="first-name" required value="sdasas" />
+            <input type="text" name="first-name" required value="Sahil"  />
 
             <label>Last name</label>
-            <input type="text" name="last-name" required value="sxss"/>
+            <input type="text" name="last-name" required  value="khan"/>
 
             <label>Member ID</label>
-            <input type="text" name="member-id" value="sdasdas" />
+            <input type="text" name="member-id" value="MOQPS079RY" />
 
             <label>Date of birth</label>
-            <input type="date" name="dob" value="2000-01-01" />
+         
+            <input type="date" name="dob" value="2001-07-20" />
 
             <label>Phone number</label>
             <input
@@ -67,6 +66,7 @@ let missionstatement = await fetchAPI(Homequery);
               placeholder="Enter 10 digit phone number"
               required
               value="9818186876"
+            
             />
 
             <label>Email address</label>
@@ -75,27 +75,28 @@ let missionstatement = await fetchAPI(Homequery);
               name="email"
               placeholder="example@sample.com"
               required
-              value="mohdsahilparsoli@gmail.com"
+              value="sahil@ogrelogic.com"
+             
             />
 
             <p class="checkbox-title">
               What is your question or comment about?
             </p>
 
-            <div class="checkbox-group">
-              <label><input type="checkbox" name="subject[]" value="ID card"  /> ID card</label>
-              <label><input type="checkbox" name="subject[]" value="Enrollment" /> Enrollment</label>
-              <label><input type="checkbox" name="subject[]" value="Referral requirements" /> Referral requirements</label>
-              <label><input type="checkbox" name="subject[]" value="Prescription" /> Prescription drug info</label>
-              <label><input type="checkbox" name="subject[]" value="Coverage" /> Coverage and benefits</label>
-              <label><input type="checkbox" name="subject[]" value="Claims" /> Filing claims</label>
-              <label><input type="checkbox" name="subject[]" value="Other" /> Other</label>
+            <div class="checkbox-group mb-0">
+              <label><input type="checkbox" name="subject[]" value="ID card" checked /> ID card</label>
+              <label><input type="checkbox" name="subject[]" value="Enrollment" checked /> Enrollment</label>
+              <label><input type="checkbox" name="subject[]" value="Referral requirements" checked /> Referral requirements</label>
+              <label><input type="checkbox" name="subject[]" value="Prescription" checked /> Prescription drug info</label>
+              <label><input type="checkbox" name="subject[]" value="Coverage" checked /> Coverage and benefits</label>
+              <label><input type="checkbox" name="subject[]" value="Claims" checked /> Filing claims</label>
+              <label><input type="checkbox" name="subject[]" value="Other" checked /> Other</label>
             </div>
 
             <label>Tell us how we can help you (optional)</label>
-            <textarea name="message" rows="4">hello sahil</textarea>
+            <textarea name="message" rows="4">hi five points kesa chal raha hai 😂😁</textarea>
 
-            <button type="submit">Send</button>
+            <button type="submit" id="submitBtn" disabled style="cursor: pointer;">Send</button>
 
             <p id="formMessage" style="margin-top:10px;"></p>
           </form>
@@ -109,15 +110,122 @@ let missionstatement = await fetchAPI(Homequery);
   const form = document.getElementById("contactForm");
   const msg = document.getElementById("formMessage");
 
+  const emailInput = document.querySelector('input[name="email"]');
+  const submitBtn = document.getElementById("submitBtn");
+
+  let isOtpVerified = false;
+
+  // 🔥 CREATE OTP UI
+  const wrapper = document.createElement("div");
+  wrapper.style.marginTop = "10px";
+
+  wrapper.innerHTML = `
+    <button type="button" id="sendOtpBtn" style="margin-bottom: 10px;     cursor: pointer;">Get OTP</button>
+
+    <div style="margin-top:10px;">
+      <input type="text" id="otpInput" placeholder="Enter OTP" />
+      <button type="button" id="verifyOtpBtn" style="    cursor: pointer;" >Verify OTP</button>
+    </div>
+
+    <p id="otpStatus" style="margin-top:5px;font-size:13px; padding:0px"></p>
+  `;
+
+  // 👉 EMAIL FIELD KE BAAD ADD
+  emailInput.insertAdjacentElement("afterend", wrapper);
+
+  // 👉 AFTER INSERT THEN SELECT
+  const sendOtpBtn = document.getElementById("sendOtpBtn");
+  const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+  const otpInput = document.getElementById("otpInput");
+  const otpStatus = document.getElementById("otpStatus");
+
+  // ✅ SEND OTP
+  sendOtpBtn.addEventListener("click", async () => {
+    const email = emailInput.value.trim();
+
+    if (!email) {
+      otpStatus.innerText = "❌ Enter email first";
+      return;
+    }
+
+    otpStatus.innerText = "⏳ Sending OTP...";
+
+    try {
+      const res = await fetch("/api/send-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await res.json();
+      console.log(data)
+
+      if (data.success) {
+        otpStatus.innerText = "✅ OTP sent to email";
+      } else {
+        otpStatus.innerText = "❌ Failed to send OTP";
+      }
+    } catch {
+      otpStatus.innerText = "⚠️ Server error";
+    }
+  });
+
+  // ✅ VERIFY OTP
+  verifyOtpBtn.addEventListener("click", async () => {
+    const email = emailInput.value.trim();
+    const otp = otpInput.value.trim();
+
+    if (!otp) {
+      otpStatus.innerText = "❌ Enter OTP";
+      return;
+    }
+
+    otpStatus.innerText = "⏳ Verifying...";
+
+    try {
+      const res = await fetch("/api/verify-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, otp })
+      });
+
+      const data = await res.json();
+      console.log("response",data)
+
+      if (data.success) {
+        otpStatus.innerText = "✅ OTP Verified";
+        isOtpVerified = true;
+        submitBtn.disabled = false;
+      } else {
+        otpStatus.innerText = "❌ Invalid OTP";
+        submitBtn.disabled = true;
+      }
+    } catch {
+      otpStatus.innerText = "⚠️ Server error";
+    }
+  });
+
+  // 🔥 EMAIL CHANGE → RESET
+  emailInput.addEventListener("input", () => {
+    isOtpVerified = false;
+    submitBtn.disabled = true;
+    otpStatus.innerText = "⚠️ Please verify OTP again";
+  });
+
+  // ✅ FORM SUBMIT
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(form);
-
-    // ✅ DEBUG (optional)
-    for (let [key, value] of formData.entries()) {
-      console.log(key, ":", value);
+    if (!isOtpVerified) {
+      msg.innerText = "❌ Please verify email first";
+      return;
     }
+
+    const formData = new FormData(form);
 
     try {
       const res = await fetch(
@@ -129,16 +237,16 @@ let missionstatement = await fetchAPI(Homequery);
       );
 
       const data = await res.json();
-      console.log("Response:", data);
 
       if (data.status === "mail_sent") {
         msg.innerText = "✅ Message sent successfully!";
         form.reset();
+        submitBtn.disabled = true;
+        otpStatus.innerText = "";
       } else {
         msg.innerText = "❌ Failed to send message.";
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
       msg.innerText = "⚠️ Something went wrong!";
     }
   });
