@@ -43,12 +43,13 @@ const plansData = (res.ourPlans.nodes || []).sort((a, b) => {
     <div class="swiper-wrapper">
 
       {
-        plansData.map((plan) => {
+        plansData.map((plan, index) => {
           const img = plan.featuredImage?.node;
 
-          // ✅ responsive sizes from WP
           const small = img?.mediaDetails?.sizes?.find(s => s.name === "medium")?.sourceUrl || img?.sourceUrl;
           const large = img?.mediaDetails?.sizes?.find(s => s.name === "large")?.sourceUrl || img?.sourceUrl;
+
+          const isFirst = index === 0;
 
           return (
             <div class="swiper-slide">
@@ -60,14 +61,21 @@ const plansData = (res.ourPlans.nodes || []).sort((a, b) => {
                     {img && (
                       <img
                         src={large}
-                        srcset={`${small} 400w, ${large} 800w`}
+                        srcset={`
+                          ${small} 400w,
+                          ${large} 800w,
+                          ${img.sourceUrl} 1200w
+                        `}
                         sizes="(max-width: 768px) 100vw, 33vw"
+
                         alt={plan.title}
                         width={img.mediaDetails?.width || 400}
                         height={img.mediaDetails?.height || 300}
-                        
-                        loading="lazy"
+
+                        loading={isFirst ? "eager" : "lazy"}
+                        fetchpriority={isFirst ? "high" : "auto"}
                         decoding="async"
+
                         style="width:100%; height:auto;"
                       />
                     )}
@@ -75,7 +83,7 @@ const plansData = (res.ourPlans.nodes || []).sort((a, b) => {
                   </a>
                 </div>
 
-                <div class="plan-data" style="min-height: 260px;">
+                <div class="plan-data">
                   <div>
                     <h3 class="fs-25">
                       <a href={`/${plan.slug}`}>{plan.title}</a>
@@ -104,4 +112,3 @@ const plansData = (res.ourPlans.nodes || []).sort((a, b) => {
     </div>
   </div>
 </div>
-

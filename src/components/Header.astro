@@ -19,176 +19,164 @@ query GetFullMenu {
   siteLogo {
     sourceUrl
     altText
+    mediaDetails {
+      width
+      height
+      sizes {
+        name
+        sourceUrl
+        width
+      }
+    }
   }
 }
 `;
 
-/* ================================
-   FETCH DATA
-================================ */
 const data = await fetchAPI(GET_FULL_MENU);
-/* ================================
-   EXTRACT MENU ITEMS
-================================ */
+
 const allMenuItems = data?.menu?.menuItems?.nodes || [];
 
 /* ================================
-   BUILD TREE FUNCTION (RECURSIVE)
+   BUILD TREE
 ================================ */
 function buildMenuTree(items, parentId = null) {
   return items
     .filter((item) => item.parentId === parentId)
     .map((item) => ({
-      id: item.id,
-      label: item.label,
-      uri: item.uri,
-      parentId: item.parentId,
+      ...item,
       children: buildMenuTree(items, item.id),
     }));
 }
 
-/* ================================
-   FINAL TREE
-================================ */
 const menuTree = buildMenuTree(allMenuItems);
-
-/* ================================
-   LOGO
-================================ */
 const siteLogo = data?.siteLogo || null;
 
 /* ================================
-   EXPORT OR USE
+   LOGO SIZES
 ================================ */
+const smallLogo =
+  siteLogo?.mediaDetails?.sizes?.find(s => s.name === "medium")?.sourceUrl ||
+  siteLogo?.sourceUrl;
 
+const largeLogo = siteLogo?.sourceUrl;
 ---
 
+{/* 🔥 PRELOAD LOGO (LCP BOOST) */}
+{largeLogo && (
+  <link rel="preload" as="image" href={largeLogo} />
+)}
+
 <header class="custom-header">
+
+  {/* TOP BAR */}
   <div class="sticky">
     <div class="container">
+
       <div class="right-value">
         <ul>
           <li class="lang">
             <select id="languageSelect">
               <option value="">Choose Your Language</option>
-              <!-- Global Languages -->
               <option value="en">English</option>
-              <option value="es">Spanish</option>
-              <option value="zh">Chinese</option>
-              <option value="ko">Korean</option>
-              <!-- Indian Languages -->
               <option value="hi">Hindi</option>
-              <option value="mr">Marathi</option>
+              <option value="bn">Bengali</option>
               <option value="ta">Tamil</option>
               <option value="te">Telugu</option>
-              <option value="bn">Bengali</option>
             </select>
           </li>
         </ul>
       </div>
+
       <div class="right-value">
         <ul>
-          <li><a href="/portal" title="Member Login">Member Login</a></li>
-          <li><a href="/portal" title="Provider Login">Provider Login</a></li>
+          <li><a href="/portal">Member Login</a></li>
+          <li><a href="/portal">Provider Login</a></li>
         </ul>
       </div>
+
     </div>
   </div>
+
+  {/* MAIN HEADER */}
   <div class="bottom-header">
     <div class="container">
       <div class="grid-bottom">
+
         <div class="mobile-grid">
+
+          {/* 🔥 LOGO */}
           <div class="main-logo">
-            <a href="/"
-              ><img
-                src={siteLogo.sourceUrl}
-                alt="HarcoSemco"
-                width="195"
-                height="88"
-              /></a
-            >
+            <a href="/">
+              {siteLogo && (
+                <img
+                  src={largeLogo}
+                  srcset={`${smallLogo} 200w, ${largeLogo} 400w`}
+                  sizes="(max-width: 768px) 150px, 200px"
+
+                  alt={siteLogo.altText || "Logo"}
+                  width={siteLogo.mediaDetails?.width || 195}
+                  height={siteLogo.mediaDetails?.height || 88}
+
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+
+                  style="width:auto; height:auto;"
+                />
+              )}
+            </a>
           </div>
+
+          {/* MENU ICON */}
           <div class="main-menu-data">
-            
             <div class="menu-icon">
-          <img src="/assets/img/menu-btn.png" alt="menu" width="40" height="40">
+              <img
+                src="/assets/img/menu-btn.png"
+                alt="menu"
+                width="40"
+                height="40"
+                loading="lazy"
+              />
             </div>
           </div>
+
         </div>
+
+        {/* NAV MENU */}
         <div class="all-here">
           <ul class="bottom-navlists zindex">
             {
               menuTree.map((item) => (
-              
-                <li
-                  class={
-                    item.children.length > 0 ? "menu-item-has-children" : ""
-                  }
-                >
-                  <a href={item.uri} title={item.label}>
-                    {item.label}
-                  </a>
+                <li class={item.children.length > 0 ? "menu-item-has-children" : ""}>
+                  <a href={item.uri}>{item.label}</a>
 
-                  {/* LEVEL 2 */}
                   {item.children.length > 0 && (
                     <ul class="sub-menu">
                       {item.children.map((child) => (
-                        <li
-                          class={
-                            child.children.length > 0
-                              ? "menu-item-has-children"
-                              : ""
-                          }
-                        >
-                          <a href={child.uri} title={child.label}>
-                            {child.label}
-                          </a>
+                        <li class={child.children.length > 0 ? "menu-item-has-children" : ""}>
+                          <a href={child.uri}>{child.label}</a>
 
-                          {/* LEVEL 3 */}
                           {child.children.length > 0 && (
                             <ul class="sub-menu">
                               {child.children.map((grandChild) => (
-                                <li
-                                  class={
-                                    grandChild.children.length > 0
-                                      ? "menu-item-has-children"
-                                      : ""
-                                  }
-                                >
-                                  <a href={grandChild.uri} title={grandChild.label}>
-                                    {grandChild.label}
-                                  </a>
-
-                                  {/* LEVEL 4 */}
-                                  {grandChild.children.length > 0 && (
-                                    <ul class="sub-menu">
-                                      {grandChild.children.map(
-                                        (greatGrandChild) => (
-                                          <li>
-                                            <a
-                                              href={greatGrandChild.uri}
-                                              title={greatGrandChild.label}
-                                            >
-                                              {greatGrandChild.label}
-                                            </a>
-                                          </li>
-                                        ),
-                                      )}
-                                    </ul>
-                                  )}
+                                <li>
+                                  <a href={grandChild.uri}>{grandChild.label}</a>
                                 </li>
                               ))}
                             </ul>
                           )}
+
                         </li>
                       ))}
                     </ul>
                   )}
+
                 </li>
               ))
             }
           </ul>
         </div>
+
       </div>
     </div>
   </div>
