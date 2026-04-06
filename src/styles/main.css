@@ -1,3 +1,7 @@
+a,
+label {
+  display: inline-block;
+}
 body,
 html {
   overflow-x: clip;
@@ -92,7 +96,6 @@ html {
   }
 }
 body {
-  margin: 0;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -122,12 +125,8 @@ h5 {
 h6 {
   font-size: 1rem;
 }
-p {
-  margin-top: 0;
-}
 a {
   color: var(--bs-link-color);
-  text-decoration: underline;
 }
 a:hover {
   color: var(--bs-link-hover-color);
@@ -154,9 +153,6 @@ thead,
 tr {
   border: 0 solid;
   border-color: inherit;
-}
-label {
-  display: inline-block;
 }
 button {
   border-radius: 0;
@@ -217,23 +213,25 @@ select {
   flex: 0 0 auto;
   width: auto;
 }
-.col-1 {
-  flex: 0 0 auto;
-  width: 8.33333333%;
-}
+.col-1,
 .col-2,
-.col-3 {
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9 {
   flex: 0 0 auto;
+}
+.col-1 {
+  width: 8.33333333%;
 }
 .col-2 {
   width: 16.66666667%;
 }
 .col-3 {
   width: 25%;
-}
-.col-4,
-.col-5 {
-  flex: 0 0 auto;
 }
 .col-4 {
   width: 33.33333333%;
@@ -242,18 +240,13 @@ select {
   width: 41.66666667%;
 }
 .col-6,
-.col-7 {
-  flex: 0 0 auto;
-}
-.col-6 {
+.features-listing,
+.ful-details-img .full-content,
+.full-img {
   width: 50%;
 }
 .col-7 {
   width: 58.33333333%;
-}
-.col-8,
-.col-9 {
-  flex: 0 0 auto;
 }
 .col-8 {
   width: 66.66666667%;
@@ -521,6 +514,9 @@ select {
   .col-xl-12 {
     flex: 0 0 auto;
     width: 100%;
+  }
+  ul.bottom-navlists li.menu-item-has-children:hover > .sub-menu {
+    display: block;
   }
 }
 @media (min-width: 1400px) {
@@ -876,8 +872,6 @@ select {
 .text-center {
   text-align: center !important;
 }
-
-/* custom css */
 .main-image img,
 .plan-img,
 .plan-img img {
@@ -909,6 +903,18 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.contact-info p a,
+.credit-card-flow .flow a,
+.find-card a,
+.grid a,
+.links p a,
+.main-titels p a,
+.main-titles-provider p a,
+.plan-card:hover h3 a,
+.reconixe-holders p a,
+section.memberportal-secc.bg-white h2.fs-40.text-blue-data a {
+  text-decoration: underline;
+}
 .menu-list h3,
 .menu-list ul li a,
 .plan-card h3 {
@@ -924,7 +930,7 @@ a {
 .plan-img {
   overflow: hidden;
 }
-.all-here li::after,
+.all-here li a::after,
 .all-here ul li a,
 .sticky .container ul li,
 a {
@@ -939,9 +945,6 @@ li {
 img {
   max-width: 100%;
   height: auto;
-}
-a {
-  display: inline-block;
 }
 a:hover,
 ul.bottom-navlists
@@ -964,6 +967,7 @@ ul li {
   line-height: var(--lh-30);
 }
 .main-img img,
+.plan-img,
 input,
 section.login-section .login-flow form,
 select,
@@ -1064,9 +1068,11 @@ header.custom-header {
 .menu-icon,
 .mobile-grid .main-menu-data,
 .pdf-flow,
+.plan-card p br,
 .single-team-mamber br,
 .sticky .container ul li:last-child::after,
 .sticky.mobile,
+p br,
 section.contact-us-flow br,
 section.finalcare-sec br,
 section.member-sec br,
@@ -1148,7 +1154,8 @@ ul.bottom-navlists .sub-menu li {
   padding: 2.5px 20px;
 }
 .bottom-header .all-here ul.bottom-navlists.flow li,
-section.member-sec.provider.pt {
+section.member-sec.provider.pt,
+section.shoupourplans-sec.section-padding {
   padding-top: 0;
 }
 .bottom-header .all-here ul.bottom-navlists.zindex {
@@ -1162,7 +1169,7 @@ ul.bottom-navlists .sub-menu li a {
   line-height: 22px;
   line-height: normal;
 }
-.all-here li::after {
+.all-here li a::after {
   position: absolute;
   width: 100%;
   height: 4px;
@@ -1172,11 +1179,18 @@ ul.bottom-navlists .sub-menu li a {
   opacity: 0;
   bottom: 0;
   z-index: 999;
+  bottom: -15px;
 }
-.all-here li.menu-item-has-children.current-menu-item::after,
-.all-here li:hover::after,
-.bootm-ligals.border-0.mt-0.main-bootm .container ul li:hover img {
+.all-here li a.active::after{
   opacity: 1;
+}
+
+.all-here li a:hover::after,
+.bootm-ligals.border-0.mt-0.main-bootm .container ul li a:hover img {
+  opacity: 1;
+}
+.all-here ul li  ul.sub-menu li a::after{
+  display: none;
 }
 .mt {
   margin-top: 170px;
@@ -1216,6 +1230,13 @@ ul.bottom-navlists .sub-menu li a {
   font-size: var(--fs-25);
   font-weight: 400;
 }
+.plan-card{
+  max-width: 438px;
+  width: 100%;
+}
+.section-tag{
+  font-size: var(--fs-40);
+}
 .main-image {
   height: 670px;
 }
@@ -1254,6 +1275,7 @@ ul.bottom-navlists .sub-menu li a {
   transform: translateX(-50%);
 }
 .bg,
+.main-slider-img,
 .plan-img a,
 .plan-img img {
   height: 100%;
@@ -1314,6 +1336,10 @@ ul.bottom-navlists .sub-menu li a {
   text-align: center;
   margin: 0 auto 40px;
 }
+.section-header p {
+  font-weight: 500;
+  font-size: var(--fs-18);
+}
 .full-data,
 .plan-card,
 .plans-grid {
@@ -1332,6 +1358,7 @@ ul.bottom-navlists .sub-menu li a {
   margin-bottom: 10px;
   font-weight: 300;
   color: var(--color-black);
+  font-size: var(--fs-35);
 }
 .plan-card {
   border: 1px solid #ddd;
@@ -1341,9 +1368,6 @@ ul.bottom-navlists .sub-menu li a {
     transform 0.3s,
     box-shadow 0.3s;
 }
-.plan-img {
-  width: 100%;
-}
 .plan-card h3 {
   line-height: normal;
   margin-bottom: 12px;
@@ -1352,32 +1376,11 @@ ul.bottom-navlists .sub-menu li a {
 .plan-card h3 a {
   text-decoration-skip-ink: none;
 }
-.contact-info p a,
-.credit-card-flow .flow a,
-.find-card a,
-.grid a,
-.links p a,
-.main-titels p a,
-.main-titles-provider p a,
-.plan-card:hover h3 a,
-section.memberportal-secc.bg-white h2.fs-40.text-blue-data a {
-  text-decoration: underline;
-}
 .plan-card p {
   font-size: 16px;
   line-height: 26px;
   padding-bottom: 10px;
   font-weight: 500;
-}
-.plan-card p br {
-    display: none;
-}
-p br{
-    display: none;
-}
-
-section.shoupourplans-sec.section-padding{
-  padding-top: 0px;
 }
 .plan-data {
   padding: 20px;
@@ -1385,12 +1388,14 @@ section.shoupourplans-sec.section-padding{
   flex-direction: column;
   justify-content: space-between;
 }
-.plan-img a {
+.main-tabs .tab.active,
+.plan-img a,
+.single-team-mamber b {
   display: block;
 }
 .plan-data .c-btn {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 0px !important;
   padding: 10px 30px;
   font-size: 16px;
 }
@@ -1459,6 +1464,7 @@ section.request-apointment .section-tag::after {
 }
 .contact-us-flow,
 .mission-statement,
+.section-padding,
 section.plan-details {
   padding: 50px 0;
 }
@@ -1537,7 +1543,9 @@ section.plan-details {
   font-size: var(--fs-30);
   line-height: var(--lh-40);
 }
-.contact-info p a {
+.contact-info p a,
+.input-f label,
+.types span {
   font-size: var(--fs-18);
   font-weight: 600;
 }
@@ -1610,7 +1618,7 @@ footer.custom-footer ul.sub-menu {
   margin-bottom: 87px;
 }
 .bootm-strip span {
-  font-size: 23px;
+  font-size: var(--fs-30);
   line-height: var(--lh-30);
   font-weight: 600;
 }
@@ -1620,8 +1628,8 @@ footer.custom-footer ul.sub-menu {
   padding: 10px 35px;
   border-radius: 30px;
   font-size: var(--fs-18);
-  max-width: 200px;
   text-align: center;
+  font-size: var(--fs-25);
 }
 .grid-card h3,
 section.in-banner .fs-30 {
@@ -1716,10 +1724,6 @@ span.progress-bar::after {
 }
 .slider-js {
   width: 33.3333333333%;
-}
-.main-slider-img {
-  height: 100%;
-  width: 100%;
 }
 .main-slider-img img {
   width: 100%;
@@ -1907,15 +1911,28 @@ section.in-banner .fs-30 {
   font-weight: 600;
   padding-bottom: 0;
 }
-.team-content span {
+.team-content b {
   text-align: center;
   display: block;
+}
+.finalcare-details .univesral-button .c-btn,
+.univesral-button.btn-f .c-btn,
+.grid-btnssss .databutton .c-btn {
+    font-size: var(--fs-20);
+    padding: 12px 30px;
+}
+.univesral-button.btn-f .c-btn{
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.finalcare-details a {
+  margin-left: 10px;
 }
 .contact-form .fs-30,
 .team-content .main-title {
   margin-bottom: 20px;
 }
-.team-content .main-title span {
+.team-content .main-title b {
   color: #1f6f80;
   font-size: var(--fs-25);
   line-height: var(--lh-35);
@@ -2111,9 +2128,13 @@ section.member-sec {
   margin-bottom: 15px;
 }
 .allabout-memberss p,
+.fs-20,
+.last-dataaa p,
 .main-titles-provider .fs-30,
 .main-titles-provider li,
-.main-titles-provider p {
+.main-titles-provider p,
+.newbutton-universal,
+.reconixe-holders p {
   font-weight: 600;
 }
 .allabout-memberss {
@@ -2153,7 +2174,10 @@ section.memberportal-secc {
 }
 .allabout-memberss.fin-provide p,
 .allabout-memberss.flow p,
-.bootm-childdata {
+.bootm-childdata,
+.employer-holderss,
+.last-dataaa,
+.textplans-mainsss {
   text-align: center;
 }
 .bootm-childdata p,
@@ -2367,7 +2391,9 @@ section.employermain-sec.section-padding.pb-0 .full-content .fs-25 {
   border: 5px solid #000;
   border-radius: 5px;
 }
+.grid h3,
 .main-center-content .fs-25,
+.main-finder-form h2,
 .main-titles-flow .fs-30 {
   font-weight: 700;
 }
@@ -2389,11 +2415,6 @@ section.employermain-sec.section-padding.pb-0 .full-content .fs-25 {
   background-color: #000;
   color: #fff;
   padding: 10px;
-}
-.features-listing,
-.ful-details-img .full-content,
-.full-img {
-  width: 50%;
 }
 .online-enrol {
   padding: 30px;
@@ -2816,10 +2837,6 @@ section.participation-participation {
   padding: 60px 0;
   background-color: #e9eef4;
 }
-.main-tabs .tab.active,
-.single-team-mamber b {
-  display: block;
-}
 .main-tabs-flow {
   display: flex;
   border-radius: 30px;
@@ -2942,11 +2959,6 @@ section.participation-participation {
   margin-top: 10px;
   font-weight: 600;
 }
-.input-f label,
-.types span {
-  font-size: var(--fs-18);
-  font-weight: 600;
-}
 .login-type {
   gap: 30px;
   padding-top: 20px;
@@ -2968,7 +2980,8 @@ section.participation-participation {
 .input-f label {
   margin-bottom: 5px;
 }
-.input-f {
+.input-f,
+.last-dataaa {
   margin-top: 15px;
 }
 .input-f input {
@@ -3134,6 +3147,7 @@ section.login-section {
   font-size: var(--fs-20);
   padding: 10px 30px;
 }
+.shopaboutgriops,
 section.memberportal-secc.bg-white {
   padding-top: 100px;
 }
@@ -3225,11 +3239,8 @@ p.flow-center {
   color: #425095;
   text-align: center;
 }
-.grid h3,
-.main-finder-form h2 {
-  font-weight: 700;
-}
 .allaboutgroups.w-100,
+.textplans-mainsss .fs-40,
 section.member-sec.provider.data-flow.data-text .fs-60,
 section.memberportal-secc.bg-white.flow .center-data,
 section.memberportal-secc.bg-white.flow .holderebg-here {
@@ -3401,7 +3412,10 @@ section.memberportal-secc.bg-white.flow .main-finder-form {
   padding-top: 30px;
 }
 .allplans-detailsss h5,
-.plans-gridholders h4.fs-40.italic {
+.plans-gridholders h4.fs-40.italic,
+.reconixe-holders .fs-40,
+.reconixe-holders .fs-40 b,
+.reconixe-holders p {
   font-style: italic;
 }
 .links-data {
@@ -3428,12 +3442,8 @@ section.memberportal-secc.bg-white.flow .main-finder-form {
 .holders-planssss .fs-20.pb-2 {
   padding-bottom: 30px !important;
 }
-.ph-content {
-  min-height: 220px;
-}
+
 .imageempoyergroups {
-  max-width: fit-content;
-  margin: 0 auto 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -3473,21 +3483,9 @@ section.memberportal-secc.bg-white.flow .main-finder-form {
 section.memberportal-secc {
   background-color: #fff;
 }
-
-/* custom css end */
-
-/* h css */
-
 .fs-20,
 .newbutton-universal {
   font-size: 20px;
-  font-weight: 600;
-}
-.fs-20,
-.last-dataaa p,
-.newbutton-universal,
-.reconixe-holders p {
-  font-weight: 600;
 }
 :root {
   --color-skyblue: #1f6f80;
@@ -3509,11 +3507,6 @@ section.memberportal-secc {
   width: 100%;
   margin: 0 auto;
 }
-.employer-holderss,
-.last-dataaa,
-.textplans-mainsss {
-  text-align: center;
-}
 .employer-holderss .fs-40,
 .shopaboutgriops .fs-40,
 .textplans-mainsss .fs-40 {
@@ -3526,9 +3519,6 @@ section.memberportal-secc {
 .last-dataaa p {
   color: var(--color-skyblue);
   font-style: italic;
-}
-.section-padding {
-  padding: 50px 0;
 }
 .shopplnas-data {
   border: 5px solid var(--color-darkblue);
@@ -3574,7 +3564,7 @@ section.memberportal-secc {
   color: var(--color-skyblue);
   display: inline-block;
   padding: 12px 10px;
-  max-width: 300px;
+  max-width: 100%;
   width: 100%;
   text-align: center;
   font-style: italic;
@@ -3604,57 +3594,63 @@ section.memberportal-secc {
   text-align: center;
   color: var(--color-fadeclue);
 }
-.reconixe-holders p {
-  font-style: italic;
-}
 .reconixe-holders p a {
-  text-decoration: underline;
   font-style: italic;
-}
-.textplans-mainsss .fs-40 {
-  padding-bottom: 0;
 }
 .allaboutgroups p {
   font-weight: 400;
   font-style: italic;
 }
-.shopaboutgriops {
-    padding-top: 100px;
-}
-.last-dataaa{
-  margin-top: 15px;
-}
-.buttons-center{
+.buttons-center {
   padding-bottom: 70px;
 }
-.reconixe-holders .fs-40 b,
-.reconixe-holders .fs-40{
-  font-style: italic;
+.finalcare-details .fs-50{
+  margin-bottom: 15px;
 }
-@media (max-width: 1400px) {
-  .newbutton-universal {
-    max-width: 250px;
-    font-size: 16px;
-    padding: 8px 10px;
-  }
+.bottom-text p a {
+  font-style: italic;
+  text-decoration: underline;
+}
+.main-list-flow a {
+    width: 100%;
+}
+ul.flow-list li {
+  margin-bottom: 30px;
+}
+ul.flow-list li a {
+      padding: 10px;
+    font-size: var(--fs-30);
+    font-weight: 600;
+    border-radius: 30px;
+    text-align: center;
+    color: #fff;
+}
+ul.flow-list li:first-child a{
+  background-color: #8963B6;
+}
+ul.flow-list li:first-child:hover a{
+background-color: #2B689C;
+}
+ul.flow-list li:nth-child(2) a{
+background-color: #028543;
+}
+ul.flow-list li:nth-child(2):hover a{
+background-color: #2B689C;
+}
+ul.flow-list li:nth-child(3) a{
+  background-color: #2B689E;
+}
+ul.flow-list li:nth-child(3):hover a{
+background-color: #BADA55;
 }
 @media (max-width: 1199px) {
   .section-padding {
     padding: 30px 0;
   }
 }
- /* h css end */
-
- /* responsivness css */
-
- @media (min-width: 1600px) {
+@media (min-width: 1600px) {
   .container {
     max-width: 1400px;
-  }
-}
-@media (min-width: 1200px) {
-  ul.bottom-navlists li.menu-item-has-children:hover > .sub-menu {
-    display: block;
   }
 }
 @media (max-width: 1600px) {
@@ -3663,6 +3659,10 @@ section.memberportal-secc {
   .main-tabs-flow .list li,
   .plan-card p {
     font-size: 15px;
+  }
+  .finalcare-details .fs-40,
+  .finalcare-details .fs-50{
+    margin-bottom: 10px;
   }
   :root {
     --fs-18: 16px;
@@ -3749,6 +3749,7 @@ section.memberportal-secc {
   .info-plans .fs-20 {
     margin: 5px 0;
   }
+  .grid-sytem h3,
   .icons,
   .info-plans p,
   .team-content .main-title {
@@ -3779,6 +3780,7 @@ section.memberportal-secc {
     margin-top: 20px;
   }
   .bootm-ligals.border-0.mt-0.main-bootm,
+  .ful-details-img,
   .main-titles-pera,
   .row-flow-contact {
     padding-top: 20px;
@@ -3825,6 +3827,7 @@ section.memberportal-secc {
   }
   .account-secuirty,
   .full-titles,
+  .shopaboutgriops,
   p.flow-center {
     padding-top: 50px;
   }
@@ -3901,9 +3904,6 @@ section.memberportal-secc {
   .pharmacy .headings-flow .fs-40 {
     max-width: 778px;
   }
-  .grid-sytem h3 {
-    margin-bottom: 10px;
-  }
   section.contact-us-flow .icons {
     margin-bottom: 10px;
     height: 80px;
@@ -3918,9 +3918,6 @@ section.memberportal-secc {
   }
   .bottom-text {
     margin-top: 40px;
-  }
-  .ful-details-img {
-    padding-top: 20px;
   }
   .imageempoyergroups {
     margin-bottom: 30px !important;
@@ -3966,6 +3963,7 @@ section.memberportal-secc {
   .main-tabs .c-btn {
     margin-top: 25px;
   }
+  .buttons-center,
   .otheritles,
   .otheritles h2,
   section.login-section,
@@ -4018,23 +4016,26 @@ section.memberportal-secc {
   .button-plansss.plan {
     padding-bottom: 0;
   }
-  .plan-img {
-    height: 300px;
+
+  .buttons-center h3 {
+    margin-top: 0;
   }
-  .shopaboutgriops{
-    padding-top: 50px;
-  }
-  .buttons-center h3{
-    margin-top: 0px;
-  }
-  .plans-gridholders{
+  .plans-gridholders {
     gap: 40px;
   }
-  .buttons-center{
-    padding-bottom: 50px;
-  }
+
+
+.finalcare-details .univesral-button .c-btn, .univesral-button.btn-f .c-btn, .grid-btnssss .databutton .c-btn{
+    font-size: var(--fs-20);
+    padding: 10px 30px;
+}
 }
 @media (max-width: 1400px) {
+  .newbutton-universal {
+    max-width: 250px;
+    font-size: 16px;
+    padding: 8px 10px;
+  }
   :root {
     --fs-30: 23px;
     --lh-40: 32px;
@@ -4047,7 +4048,8 @@ section.memberportal-secc {
     --lh-50: 35px;
   }
   .contact-form .fs-30,
-  .main-titles-provider ul {
+  .main-titles-provider ul,
+  .reconixe-holders .fs-40 {
     margin-bottom: 10px;
   }
   .inputfeilds,
@@ -4068,6 +4070,7 @@ section.memberportal-secc {
   }
   .center-titles p,
   .input-f,
+  .last-dataaa,
   .login .c-btn,
   .main-about,
   .savebtn input,
@@ -4162,6 +4165,7 @@ section.memberportal-secc {
   .full-titles,
   .main-center-content,
   .main-grid-flow,
+  .shopaboutgriops,
   section.memberportal-secc.bg-white.flow {
     padding-top: 30px;
   }
@@ -4276,17 +4280,8 @@ section.memberportal-secc {
   .main-logo {
     margin: 0;
   }
-  .shopaboutgriops{
-    padding-top: 30px;
-  }
-  .last-dataaa{
-    margin-top: 10px;
-  }
-   .buttons-center{
+  .buttons-center {
     padding-bottom: 40px;
-  }
-  .reconixe-holders .fs-40{
-    margin-bottom: 10px;
   }
 }
 @media (max-width: 1200px) {
@@ -4424,6 +4419,7 @@ section.memberportal-secc {
   .grid-bottom {
     padding: 10px 0;
   }
+  .buttons-center,
   .otheritles,
   section.login-section {
     padding-bottom: 30px;
@@ -4546,9 +4542,6 @@ section.memberportal-secc {
   }
   .plans-gridholders {
     gap: 30px !important;
-  }
-  .buttons-center{
-    padding-bottom: 30px;
   }
 }
 @media (max-width: 995px) {
@@ -4791,11 +4784,23 @@ section.memberportal-secc {
   .grid-sytem {
     justify-content: center;
   }
-  .plans-gridholders{
+  .plans-gridholders {
     padding-top: 30px !important;
   }
-  .buttons-center a{
+  .buttons-center a {
     padding: 15px 30px;
+  }
+  .finalcare-details{
+    padding-top: 15px;
+  }
+  .finalcare-details .fs-40, .finalcare-details .fs-50{
+    margin-bottom: 5px;
+  }
+  .image-members{
+    margin-top: 15px;
+  }
+  .finalcare-details .univesral-button{
+    padding-top: 10px;
   }
 }
 @media (max-width: 768px) {
@@ -4900,9 +4905,7 @@ section.memberportal-secc {
   p.flow-center {
     padding-top: 15px;
   }
-  .plan-img {
-    height: 200px;
-  }
+
   .plan-card h3 {
     height: 50px;
   }
@@ -4986,6 +4989,11 @@ section.memberportal-secc {
     align-items: center;
     text-align: center;
   }
+  .datagridsss,
+  .inputfeilds,
+  .main-tabs-flow {
+    flex-direction: column;
+  }
   .margin-bottom {
     margin-bottom: 107px;
   }
@@ -5033,7 +5041,6 @@ section.memberportal-secc {
     border-bottom: 1px solid #000;
   }
   .datagridsss {
-    flex-direction: column;
     gap: 20px;
   }
   .datagridsss p {
@@ -5060,10 +5067,6 @@ section.memberportal-secc {
     display: flex;
     align-items: center;
     gap: 5px;
-  }
-  .inputfeilds,
-  .main-tabs-flow {
-    flex-direction: column;
   }
   .optum-rx-welcome .fs-60 {
     margin-bottom: 10px;
@@ -5137,5 +5140,3 @@ section.memberportal-secc {
     font-size: 20px;
   }
 }
-/* css responsivness */
- /* main css */

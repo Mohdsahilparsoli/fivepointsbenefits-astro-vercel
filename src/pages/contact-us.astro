@@ -47,17 +47,17 @@ let missionstatement = await fetchAPI(Homequery);
             <input type="hidden" name="_wpcf7_version" value="5.8" />
 
             <label>First name</label>
-            <input type="text" name="first-name" required value="Sahil"  />
+            <input type="text" name="first-name" required  />
 
             <label>Last name</label>
-            <input type="text" name="last-name" required  value="khan"/>
+            <input type="text" name="last-name" required  />
 
             <label>Member ID</label>
-            <input type="text" name="member-id" value="MOQPS079RY" />
+            <input type="text" name="member-id"  />
 
             <label>Date of birth</label>
          
-            <input type="date" name="dob" value="2001-07-20" />
+            <input type="date" name="dob" />
 
             <label>Phone number</label>
             <input
@@ -65,7 +65,7 @@ let missionstatement = await fetchAPI(Homequery);
               name="phone"
               placeholder="Enter 10 digit phone number"
               required
-              value="9818186876"
+             
             
             />
 
@@ -75,7 +75,7 @@ let missionstatement = await fetchAPI(Homequery);
               name="email"
               placeholder="example@sample.com"
               required
-              value="sahil@ogrelogic.com"
+             
              
             />
 
@@ -84,17 +84,17 @@ let missionstatement = await fetchAPI(Homequery);
             </p>
 
             <div class="checkbox-group mb-0">
-              <label><input type="checkbox" name="subject[]" value="ID card" checked /> ID card</label>
-              <label><input type="checkbox" name="subject[]" value="Enrollment" checked /> Enrollment</label>
-              <label><input type="checkbox" name="subject[]" value="Referral requirements" checked /> Referral requirements</label>
-              <label><input type="checkbox" name="subject[]" value="Prescription" checked /> Prescription drug info</label>
-              <label><input type="checkbox" name="subject[]" value="Coverage" checked /> Coverage and benefits</label>
-              <label><input type="checkbox" name="subject[]" value="Claims" checked /> Filing claims</label>
-              <label><input type="checkbox" name="subject[]" value="Other" checked /> Other</label>
+              <label><input type="checkbox" name="subject[]" value="ID card"  /> ID card</label>
+              <label><input type="checkbox" name="subject[]" value="Enrollment"  /> Enrollment</label>
+              <label><input type="checkbox" name="subject[]" value="Referral requirements"  /> Referral requirements</label>
+              <label><input type="checkbox" name="subject[]" value="Prescription"  /> Prescription drug info</label>
+              <label><input type="checkbox" name="subject[]" value="Coverage"  /> Coverage and benefits</label>
+              <label><input type="checkbox" name="subject[]" value="Claims"  /> Filing claims</label>
+              <label><input type="checkbox" name="subject[]" value="Other"  /> Other</label>
             </div>
 
             <label>Tell us how we can help you (optional)</label>
-            <textarea name="message" rows="4">hi five points kesa chal raha hai 😂😁</textarea>
+            <textarea name="message" rows="4"></textarea>
 
             <button type="submit" id="submitBtn" disabled style="cursor: pointer;">Send</button>
 
