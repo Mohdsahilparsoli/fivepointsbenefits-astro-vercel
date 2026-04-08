@@ -8,7 +8,7 @@ Astro.response.headers.set(
 );
 
 const Homequery = `query GetPage {
-  page(id: "portal", idType: URI) {
+  page(id: "provider-login", idType: URI) {
     title
     content
     slug
@@ -37,8 +37,8 @@ let portal = await fetchAPI(Homequery);
         <div class="top-login-content">
           <h1>Sign In</h1>
           <p>Sign In to Access Your Account</p>
-          <span>Choose Account Type</span>
-          <div class="login-type">
+          <!-- <span>Choose Account Type</span> -->
+          <!-- <div class="login-type">
             <label for="Member">
               <div class="types">
                 <img src="/assets/img/memmber.PNG" alt="" />
@@ -63,10 +63,10 @@ let portal = await fetchAPI(Homequery);
                 />
               </div></label
             >
-          </div>
-          <div class="bottom-links">
+          </div> -->
+          <!-- <div class="bottom-links">
             <p>Staff Sign In? <a href="#">Click Here</a></p>
-          </div>
+          </div> -->
           <form action="#">
             <div class="login-from">
               <div class="input-f">
