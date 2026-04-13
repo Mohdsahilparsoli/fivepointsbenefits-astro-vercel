@@ -31,63 +31,58 @@ let portal = await fetchAPI(Homequery);
   >
     <div class="container">
       <div class="login-form">
-        <div class="main-logo">
-          <img src="/assets/img/logo.png" alt="" />
+  
+  <!-- Logo Top -->
+  <div class="main-logo">
+    <img src="/assets/img/logo.png" alt="Points Healthcare" />
+  </div>
+
+  <div class="top-login-content">
+    
+    <!-- Updated Title -->
+    <h1>Secure Member Log In</h1>
+
+    <form action="#">
+      <div class="login-from">
+
+        <div class="input-f">
+          <div class="top-list">          <label>Username</label>
+          <a href="#" class="forgot-link">Forgot Username</a></div>
+          <input type="text" placeholder="Enter your Username" />
+        
         </div>
-        <div class="top-login-content">
-          <h1>Sign In</h1>
-          <p>Sign In to Access Your Account</p>
-          <!-- <span>Choose Account Type</span>
-          <div class="login-type">
-            <label for="Member">
-              <div class="types">
-                <img src="/assets/img/memmber.PNG" alt="" />
-                <span>Member</span>
-                <input
-                  type="radio"
-                  name="type"
-                  id="Member"
-                  style="opacity: 0"
-                />
-              </div></label
-            >
-            <label for="Provider"
-              ><div class="types">
-                <img src="/assets/img/provider.PNG" alt="" />
-                <span>Provider</span>
-                <input
-                  type="radio"
-                  name="type"
-                  id="Provider"
-                  style="opacity: 0"
-                />
-              </div></label
-            >
-          </div> -->
-          <!-- <div class="bottom-links">
-            <p>Staff Sign In? <a href="#">Click Here</a></p>
-          </div> -->
-          <form action="#">
-            <div class="login-from">
-              <div class="input-f">
-                <label for="">Username</label>
-                <input type="text" placeholder="Enter your Username" />
-              </div>
-              <div class="input-f">
-                <label for="">Password</label>
-                <input type="password" placeholder="Enter your password" />
-              </div>
-              <a href="#" class="forgat">Forgot Your Password?</a>
-              <div class="savebtn">
-                <input type="submit" value="sign in" />
-              </div>
-              <div class="bottom-tiles">
-                <p>Fist Time User? <a href="#">Setup Your Account.</a></p>
-              </div>
-            </div>
-          </form>
+
+        <div class="input-f">
+
+             <div class="top-list">                    <label>Password</label>
+          <a href="#">Forgot Password</a></div>
+          <input type="password" placeholder="Enter your password" />
+         
         </div>
+
+        <div class="savebtn">
+          <input type="submit" value="Log In" />
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Bottom Content -->
+        <div class="bottom-tiles">
+          <span>Don’t have an account?</span>
+          <p>
+          Activate now to get the <br> most of your policy.</p>
+        </div>
+
+        <div class="activate-btn">
+          <a href="#">Activate Your Account</a>
+        </div>
+
       </div>
+    </form>
+
+  </div>
+</div>
     </div>
   </section>
   <section class="login-section">
