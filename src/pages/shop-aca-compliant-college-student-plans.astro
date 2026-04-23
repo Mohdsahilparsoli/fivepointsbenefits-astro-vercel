@@ -77,8 +77,6 @@ const shop = `query GetPage {
 }`;
 
 let shoppage = await fetchAPI(shop);
-
-
 ---
 
 <BaseLayout title={shoppage.page.title} fullHead={shoppage.page.seo.fullHead}>
@@ -101,7 +99,7 @@ let shoppage = await fetchAPI(shop);
   </section>
   <section class="about-student">
     <div class="container">
-      <div class="row align-items-center">
+      <div class="row align-items-center space-between">
         <div class="col-lg-5">
           <div class="about-img">
             <img
@@ -112,7 +110,7 @@ let shoppage = await fetchAPI(shop);
           </div>
         </div>
         <div
-          class="col-lg-7"
+          class="col-lg-6"
           set:html={`${shoppage.page.aboutStudent.aboutStudentCoverage}`}
         />
       </div>
@@ -183,117 +181,123 @@ let shoppage = await fetchAPI(shop);
     </div>
   </section>
 
-  <section class="shoupourplans-sec section-padding">
+  <section class="shoupourplans-sec section-padding bg-flow">
     <div class="container">
       <div class="plans-gridholders">
-        <div class="row palnsrows ">
+        <div class="row palnsrows">
           <div class="col-12">
             <div class="textplans-mainsss">
               <h4 class="fs-40">Choose The Plan That Fits You:</h4>
             </div>
           </div>
 
-        <div class="row justify-content-center">
-          <div class="col-8 mx-auto">
-            <div class="row justify-content-center">
+          <div class="row justify-content-center">
+            <div class="col-10 mx-auto">
+              <div class="row justify-content-center">
                 {
-            shoppage.page.aboutStudent.shopPlans?.map((plan, index) => (
-              <div class="col-md-6 col-lg-6" key={index}>
-                <div class="holders-planssss">
-                  <h4 class="fs-20">{plan.title}</h4>
+                  shoppage.page.aboutStudent.shopPlans?.map((plan, index) => (
+                    <div class="col-md-6 col-lg-6" key={index}>
+                      <div class="holders-planssss">
+                        <h4 class="fs-20">{plan.title}</h4>
 
-                  <div class="image-holderssplanss">
-                    <div
-                      class="allchild-holders"
-                      style={{ background: plan.backgroundColor }}
-                    >
-                      <div class="image-dtaaplans">
-                        <img
-                          src="/assets/img/logoplans.png"
-                          width="350"
-                          height="160"
-                          loading="lazy"
-                          alt={plan.title}
-                        />
+                        <div class="image-holderssplanss">
+                          <div
+                            class="allchild-holders"
+                            style={{ background: plan.backgroundColor }}
+                          >
+                            <div class="image-dtaaplans">
+                              <img
+                                src="/assets/img/logoplans.png"
+                                width="350"
+                                height="160"
+                                loading="lazy"
+                                alt={plan.title}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="button-plansss">
+                          <div class="grid-butttonsplans">
+                            <div class="universal-newbutton btns">
+                              <a
+                                href={plan.summaryLink}
+                                target="_blank"
+                                class="newbutton-universal"
+                              >
+                                Medical Benefit Summary
+                              </a>
+                            </div>
+
+                            <div class="universal-newbutton">
+                              <a
+                                href={plan.sbcLink}
+                                target="_blank"
+                                class="newbutton-universal"
+                              >
+                                {plan.title} SBC
+                              </a>
+                            </div>
+                            <a href="#" class="c-btn">
+                              Enroll Now
+                            </a>
+                          </div>
+                        </div>
                       </div>
-
-                     
                     </div>
-                  </div>
-
-                  <div class="button-plansss">
-                    <div class="grid-butttonsplans">
-                      <div class="universal-newbutton">
-                        <a
-                          href={plan.summaryLink}
-                          target="_blank"
-                          class="newbutton-universal"
-                        >
-                      Medical Benefit Summary
-                        </a>
-                      </div>
-
-                      <div class="universal-newbutton">
-                        <a
-                          href={plan.sbcLink}
-                          target="_blank"
-                          class="newbutton-universal"
-                        >
-                         {plan.title} SBC
-                        </a>
-                      </div>
-                      <a href="#" class="c-btn">Enroll Now</a>
-                    </div>
-                  </div>
-                </div>
+                  ))
+                }
               </div>
-            ))
-          }
+            </div>
+            <div class="col-10 mx-auto y-auto">
+              <div class="row justify-content-center">
+                {
+                  shoppage.page.aboutStudent.secondPlans?.map((plan, index) => (
+                    <div class="col-md-6 col-lg-6" key={index}>
+                      <div class="holders-planssss">
+                        <h4 class="fs-20">{plan.title}</h4>
+
+                        <div class="image-holderssplanss">
+                          <div
+                            class="allchild-holders"
+                            style={{ background: plan.backgroundColor }}
+                          >
+                            <div class="image-dtaaplans">
+                              <img
+                                src="/assets/img/logoplans.png"
+                                width="350"
+                                height="160"
+                                loading="lazy"
+                                alt={plan.title}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                       <div class="sort-info"> <p> {plan.plansInfo}</p></div>
+
+                        <div class="grid-butttonsplans">
+                        
+                          <a href="#" class="c-btn">
+                            Enroll Now
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           </div>
-           <div class="col-8 mx-auto">
-            <div class="row justify-content-center">
-                {
-            shoppage.page.aboutStudent.secondPlans?.map((plan, index) => (
-              <div class="col-md-6 col-lg-6" key={index}>
-                <div class="holders-planssss">
-                  <h4 class="fs-20">{plan.title}</h4>
-
-                  <div class="image-holderssplanss">
-                    <div
-                      class="allchild-holders"
-                      style={{ background: plan.backgroundColor }}
-                    >
-                      <div class="image-dtaaplans">
-                        <img
-                          src="/assets/img/logoplans.png"
-                          width="350"
-                          height="160"
-                          loading="lazy"
-                          alt={plan.title}
-                        />
-                      </div>
-                       
-                     
-                    </div>
-                    
-                  </div>
-  <p>  {plan.plansInfo}</p>
-                 
-                </div>
-              </div>
-            ))
-          }
-            </div>
-          </div>
         </div>
-        </div>
-        <div class="reconixe-holders">
-          <div class="reconixe-holders" set:html={shoppage.page.aboutStudent.fivePointLetter}>
-           
-          </div>
-        </div>
+      
       </div>
     </div>
+    
   </section>
+    <div class="reconixe-holders">
+          <div
+            class="reconixe-holders"
+            set:html={shoppage.page.aboutStudent.fivePointLetter}
+          />
+        </div>
 </BaseLayout>

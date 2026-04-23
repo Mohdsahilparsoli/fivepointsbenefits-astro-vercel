@@ -614,6 +614,8 @@ select {
   ul.bottom-navlists li.menu-item-has-children:hover>.sub-menu {
     display: block
   }
+
+
 }
 
 @media (min-width:1400px) {
@@ -4343,20 +4345,22 @@ ul.flow-list li:nth-child(3):hover a {
 }
 
 /* new css */
-.colleg-pans img{
+.colleg-pans img {
   background-color: var(--bs-body-bg);
 }
-.colleg-pans span{
+
+.colleg-pans span {
   color: #fff;
   font-size: var(--fs-20);
   font-weight: 600;
 }
 
-.colleg-pans h1{
+.colleg-pans h1 {
   margin-top: 10px;
   font-weight: 600;
   margin-bottom: 15px;
 }
+
 .colleg-pans p {
   font-size: var(--fs-20);
   font-weight: 600;
@@ -4369,76 +4373,158 @@ ul.flow-list li:nth-child(3):hover a {
   max-width: 250px;
   width: 100%;
 }
-.about-student{
+
+.about-student {
   padding: 80px 0px;
 }
 
-.about-student-content span{
+.about-student-content span {
   font-size: var(--fs-20);
-    color: var(--color-fadeclue);
+  color: var(--color-fadeclue);
   font-weight: 600;
   display: block;
   margin-bottom: 5px;
 }
-.about-student-content h2{
+
+.about-student-content h2 {
   font-size: var(--fs-40);
   line-height: normal;
   margin-bottom: 10px;
   font-weight: 600;
-      color: var(--color-fadeclue);
+  color: var(--color-fadeclue);
 }
+
 .about-student-content p {
-font-weight: 600;
- color: #0F4562;
- margin-bottom: 15px;
+  font-weight: 600;
+  color: #0F4562;
+  margin-bottom: 15px;
 }
+
 .about-student-content ul li {
   font-size: var(--fs-18);
   font-weight: 600;
-     color: var(--color-fadeclue);
-   padding: 5px 0px;
-   list-style: disc;
+  color: var(--color-fadeclue);
+  padding: 5px 0px;
+  list-style: disc;
 }
+
 .about-student-content ul {
   margin-left: 30px;
 }
-.about-img{
+
+.about-img {
   border-radius: 20px;
   overflow: hidden;
   margin-top: 40px;
 }
-.about-student-content{
+
+.about-student-content {
   padding-left: 10px;
 }
-.about-student-content h2.fs-30{
+
+.about-student-content h2.fs-30 {
   font-size: var(--fs-30);
 }
-.pharmacy.main-content h3{
 
-       color: var(--color-fadeclue);
-      font-weight: 600;
-}
-.pharmacy.main-content .ph-content p {
-    color: var(--color-fadeclue);
+.pharmacy.main-content h3 {
+
+  color: var(--color-fadeclue);
   font-weight: 600;
 }
-section.pharmacy.main-content h3{
-     color: var(--color-fadeclue);
+
+.pharmacy.main-content .ph-content p {
+  color: var(--color-fadeclue);
+  font-weight: 600;
+}
+
+section.pharmacy.main-content h3 {
+  color: var(--color-fadeclue);
   font-size: var(--fs-25);
 }
-section.pharmacy.main-content  .headings-flow .fs-40{
-     color: var(--color-fadeclue);
+
+section.pharmacy.main-content .headings-flow .fs-40 {
+  color: var(--color-fadeclue);
 }
+
 /* new css start */
 section.about-student br {
   display: none;
 }
-.row.justify-content-center{
+
+.row.justify-content-center {
   justify-content: center;
 }
-.row.justify-content-center .holders-planssss{
-  margin-bottom: 30px;
+
+.row.justify-content-center .holders-planssss {
+  margin-bottom: 50px;
 }
+
+
+section.shoupourplans-sec.section-padding.bg-flow {
+  background-color: #F4F9FC;
+  margin-top: 60px;
+}
+
+section.shoupourplans-sec.section-padding.bg-flow .holders-planssss .fs-20 {
+  font-size: var(--fs-30);
+  font-style: normal;
+}
+
+section.shoupourplans-sec.section-padding.bg-flow .holders-planssss .grid-butttonsplans .universal-newbutton a {
+  background-color: var(--bs-body-bg);
+}
+
+section.shoupourplans-sec.section-padding.bg-flow .holders-planssss .universal-newbutton:hover a {
+  background: var(--color-darkblue);
+  color: var(--color-white);
+  border-color: var(--color-darkblue);
+
+}
+
+section.shoupourplans-sec.section-padding.bg-flow .holders-planssss .universal-newbutton.btns a {
+  font-style: italic;
+
+}
+section.shoupourplans-sec.section-padding.bg-flow.bg-white{
+  background-color: #fff !important;
+  margin-top: 0px !important;
+}
+
+section.shoupourplans-sec.section-padding.bg-flow .holders-planssss .universal-newbutton a {
+  font-style: normal;
+  font-weight: 700;
+}
+
+section.shoupourplans-sec.section-padding.bg-flow .holders-planssss .grid-butttonsplans .c-btn {
+  background-color: #0074C9;
+  font-size: var(--fs-25);
+  font-weight: 600;
+}
+.sort-info{
+  margin-top: 30px;
+  background-color: #fff;
+  padding: 20px 45px;
+  
+}
+.sort-info p {
+font-size: var(--fs-25);
+  font-weight: 600;
+      color: var(--color-skyblue);
+}
+.reconixe-holders{
+  padding: 20px 0px;
+}
+section.shoupourplans-sec.section-padding.bg-flow{
+  padding-bottom: 10px;
+}
+
+.col-8.mx-auto.y-auto{
+  margin-top: 90px;
+}
+.row.align-items-center.space-between{
+  gap: 50px;
+}
+
 @media (max-width:1199px) {
   .section-padding {
     padding: 30px 0
@@ -4908,6 +4994,31 @@ section.about-student br {
   .section-header p {
     line-height: 28px
   }
+  .about-student{
+    padding: 60px 0px;
+  }
+      .row.align-items-center.space-between{
+    gap: 40px;
+  }
+  section.about-student p {
+    margin-bottom: 10px;
+  }
+  .colleg-pans img{
+    margin-top: 30px;
+  }
+  .ph-icons{
+    max-width: 60px;
+    margin: 0 auto;
+  }
+  .grid-sytem{
+    gap: 10px;
+  }
+  section.shoupourplans-sec.section-padding.bg-flow{
+    margin-top: 30px;
+  }
+  .row.justify-content-center .holders-planssss{
+  margin-bottom: 20px;
+}
 }
 
 @media (max-width:1400px) {
@@ -5233,6 +5344,30 @@ section.about-student br {
     max-width: 400px;
     height: 210px
   }
+      .row.align-items-center.space-between{
+    gap: 30px;
+  }
+    .colleg-pans img{
+    margin-top: 20px;
+  }
+  section.shoupourplans-sec.section-padding.bg-flow{
+    margin-top: 20px;
+  }
+    .row.justify-content-center .holders-planssss{
+  margin-bottom: 15px;
+}
+  .row.justify-content-center  .newbutton-universal{
+max-width: 100%;
+}
+.sort-info{
+  margin-top: 10px;
+}
+.grid-butttonsplans{
+  padding-top: 15px;
+}
+.reconixe-holders{
+  padding: 15px;
+}
 }
 
 @media (max-width:1200px) {
@@ -5553,6 +5688,13 @@ section.about-student br {
 
   .section-tag {
     font-size: 25px
+  }
+    .about-student{
+    padding: 50px 0px;
+  }
+
+        .row.align-items-center.space-between{
+    gap: 20px;
   }
 }
 
@@ -5891,6 +6033,25 @@ section.about-student br {
   .main-slider-img img {
     height: 100% !important
   }
+      .about-student{
+    padding: 40px 0px;
+  }
+          .row.align-items-center.space-between{
+    gap: 0px;
+  }
+  .about-img{
+    margin-top: 0px;
+  }
+  .about-img{
+    border-radius: 0px;
+    margin-bottom: 15px;
+  }
+  .sort-info{
+    padding: 15px;
+  }
+  .about-img{
+    margin-top: 15px;
+  }
 }
 
 @media (max-width:768px) {
@@ -6029,6 +6190,9 @@ section.about-student br {
 
   .plan-card h3 {
     height: 50px
+  }
+        .about-student{
+    padding: 30px 0px;
   }
 }
 
@@ -6312,6 +6476,9 @@ section.about-student br {
 
   .imageempoyergroups.w-100 span {
     font-size: 20px
+  }
+  section.member-sec{
+    padding: 30px 15px;
   }
 }
 
