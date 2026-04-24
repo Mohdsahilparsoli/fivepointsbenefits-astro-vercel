@@ -3982,7 +3982,8 @@ section.memberportal-secc.bg-white.flow .main-finder-form {
   max-width: 450px;
   width: 100%;
   margin: 60px auto 0;
-  font-size: var(--fs-30)
+  font-size: var(--fs-30);
+  margin-top: 0px !important;
 }
 
 .buttons-center a {
@@ -4299,7 +4300,8 @@ section.memberportal-secc {
 }
 
 .buttons-center {
-  padding-bottom: 70px
+  padding-bottom: 10px !important;
+  
 }
 
 .finalcare-details .fs-50 {
@@ -4525,6 +4527,17 @@ section.shoupourplans-sec.section-padding.bg-flow{
   gap: 50px;
 }
 
+section.employermain-sec.section-padding.shoupourplans-sec.bg-flow.bg-white.main-title .holders-planssss{
+  max-width: 480px;
+  margin: 0px;
+  margin-bottom: 50px;
+}
+section.employermain-sec.section-padding.shoupourplans-sec.bg-flow.bg-white.main-title  .plans-gridholders{
+gap: 30px;
+}
+section.employermain-sec.section-padding.shoupourplans-sec.bg-flow.bg-white.main-title  .universal-newbutton.btns a{
+  font-style: italic;
+}
 @media (max-width:1199px) {
   .section-padding {
     padding: 30px 0
@@ -5019,6 +5032,9 @@ section.shoupourplans-sec.section-padding.bg-flow{
   .row.justify-content-center .holders-planssss{
   margin-bottom: 20px;
 }
+section.employermain-sec.section-padding.shoupourplans-sec.bg-flow.bg-white.main-title .holders-planssss{
+  margin-bottom: 30px;
+}
 }
 
 @media (max-width:1400px) {
@@ -5367,6 +5383,12 @@ max-width: 100%;
 }
 .reconixe-holders{
   padding: 15px;
+}
+section.employermain-sec.section-padding.shoupourplans-sec.bg-flow.bg-white.main-title .holders-planssss{
+  margin-bottom: 25px;
+}
+section.employermain-sec.section-padding.shoupourplans-sec.bg-flow.bg-white.main-title .plans-gridholders{
+  gap: 20px !important;
 }
 }
 
@@ -6052,6 +6074,14 @@ max-width: 100%;
   .about-img{
     margin-top: 15px;
   }
+  section.employermain-sec.section-padding.shoupourplans-sec.bg-flow.bg-white.main-title .plans-gridholders{
+  gap: 10px !important;
+  padding-top: 10px !important;
+}
+    section.employermain-sec.section-padding.shoupourplans-sec.bg-flow.bg-white.main-title .holders-planssss {
+        margin-bottom: 20px;
+    }
+  
 }
 
 @media (max-width:768px) {

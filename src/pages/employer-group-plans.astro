@@ -2,10 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { fetchAPI } from "../lib/wordpress";
 
-
 Astro.response.headers.set(
-  'Cache-Control',
-  'public, s-maxage=120, stale-while-revalidate=30'
+  "Cache-Control",
+  "public, s-maxage=120, stale-while-revalidate=30",
 );
 
 const Homequery = `
@@ -23,7 +22,7 @@ query GetPage {
       employerPlan {
         backgroundColor
         sbcPlan
-        sobPlan
+       summaryLink
         subTitle
         title
       }
@@ -47,10 +46,10 @@ query GetPage {
 let plan = await fetchAPI(Homequery);
 ---
 
- <BaseLayout title={plan.page.seo.title} fullHead={plan.page.seo.fullHead}>
-
-  <section class="employermain-sec section-padding shoupourplans-sec">
-
+<BaseLayout title={plan.page.seo.title} fullHead={plan.page.seo.fullHead}>
+  <section
+    class="employermain-sec section-padding shoupourplans-sec bg-flow bg-white"
+  >
     <!-- GALLERY -->
     <div class="imageempoyergroups">
       {
@@ -58,94 +57,81 @@ let plan = await fetchAPI(Homequery);
           const img = item?.gallaryProfile?.node;
 
           return (
-            <img
-              key={index}
-              src={img?.sourceUrl}
-              alt={`gallery-${index}`}
-            />
+            <img key={index} src={img?.sourceUrl} alt={`gallery-${index}`} />
           );
         })
       }
     </div>
 
     <div class="container">
-
       <!-- PAGE CONTENT -->
       <div set:html={plan.page.content} />
 
       <!-- PLANS -->
       <div class="plans-gridholders">
-        <div class="row palnsrows justify-content-center">
+        <div class="row justify-content-center">
+          <div class="col-10 mx-auto">
+            <div class="row justify-content-center">
+              {
+                plan?.page?.employerPlan?.employerPlan?.map((plan, index) => (
+                  <div class="col-md-6 col-lg-6" key={index}>
+                    <div class="holders-planssss">
+                      <h4 class="fs-20">{plan.title}</h4>
 
-          {
-            plan?.page?.employerPlan?.employerPlan?.map((item) => (
-              <div class="col-md-6 col-lg-4">
-                <div class="holders-planssss">
-
-                  <h4 class="fs-20">{item.title}</h4>
-
-                  <div class="image-holderssplanss">
-                    <div
-                      class="allchild-holders"
-                      style={{ background: item.backgroundColor }}
-                    >
-                      <div class="image-dtaaplans">
-                        <img
-                          src="/assets/img/logoplans.png"
-                          alt={item.title}
-                          loading="lazy"
-                        />
+                      <div class="image-holderssplanss">
+                        <div
+                          class="allchild-holders"
+                          style={{ background: plan.backgroundColor }}
+                        >
+                          <div class="image-dtaaplans">
+                            <img
+                              src="/assets/img/logoplans.png"
+                              width="350"
+                              height="160"
+                              loading="lazy"
+                              alt={plan.title}
+                            />
+                          </div>
+                        </div>
                       </div>
 
-                      {/* <div class="allplans-detailsss">
-                        <h5 class="plansnamee">{item.title}</h5>
-                        <p>{item.subTitle}</p>
-                      </div> */}
+                      <div class="button-plansss">
+                        <div class="grid-butttonsplans">
+                          <div class="universal-newbutton btns">
+                            <a
+                              href={plan.summaryLink}
+                              target="_blank"
+                              class="newbutton-universal"
+                              style="font-weight: 600;"
+                            >
+                              Medical Benefit Summary
+                            </a>
+                          </div>
+                          {plan.title !== "Reference-Based Pricing Plan" && (
+                            <div className="universal-newbutton btns">
+                              <a
+                                href={plan.sbcPlan}
+                                target="_blank"
+                                 class="newbutton-universal"
+                                 style="font-style: normal; font-weight: 700;"
+                              >
+                                {plan.title} SBC
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <!-- BUTTONS -->
-                  <div class="button-plansss">
-                    <div class="grid-butttonsplans">
-
-                      <div class="universal-newbutton">
-                        <a
-                          href={item.sobPlan}
-                          target="_blank"
-                          class="newbutton-universal"
-                          title={`${item.title} SOB`}
-                        >
-                        Medical Benefit Summary
-                        </a>
-                      </div>
-
-                      <div class="universal-newbutton">
-                        <a
-                          href={item.sbcPlan}
-                          target="_blank"
-                          class="newbutton-universal"
-                          title={`${item.title} SBC`}
-                        >
-                          COMPLETE CARE Plan SBC
-                        </a>
-                      </div>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            ))
-          }
-
+                ))
+              }
+            </div>
+          </div>
         </div>
 
         <!-- EXTRA CONTENT -->
         <div set:html={plan?.page?.employerPlan?.fivePointLetter} />
-
       </div>
-
     </div>
   </section>
-
 </BaseLayout>
