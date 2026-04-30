@@ -145,13 +145,16 @@ let shoppage = await fetchAPI(shop);
       </div>
     </div>
   </section> -->
-  <section class="finalcare-sec mt-0">
+  <section class="finalcare-sec mt-0 main-flow-text">
     <div
       class="container"
       set:html={`${shoppage.page.aboutStudent.findeCarePortal}`}
     />
   </section>
-  <section class="pharmacy main-content" style="background-color: #FFFFFF;">
+  <section
+    class="pharmacy main-content w-100"
+    style="background-color: #FFFFFF;"
+  >
     <div class="container">
       <div class="headings-flow">
         <h2 class="fs-40">
@@ -273,10 +276,12 @@ let shoppage = await fetchAPI(shop);
                             </div>
                           </div>
                         </div>
-                       <div class="sort-info"> <p> {plan.plansInfo}</p></div>
+                        <div class="sort-info">
+                          {" "}
+                          <p> {plan.plansInfo}</p>
+                        </div>
 
                         <div class="grid-butttonsplans">
-                        
                           <a href="#" class="c-btn">
                             Enroll Now
                           </a>
@@ -289,15 +294,38 @@ let shoppage = await fetchAPI(shop);
             </div>
           </div>
         </div>
-      
       </div>
     </div>
-    
+
+   <div class="container">
+     <div class="main-bootm-data">
+      <h2 class="fs-40">Covered Colleges and Universities</h2>
+      <div class="main-title">
+        <h3  class="fs-25">Our plans are accepted at the following schools and many more:</h3>
+        <ul>
+          <li>Boston University</li>
+          <li>Columbia University</li>
+          <li>Harvard University</li>
+          <li>New York University</li>
+          <li>Northeastern University</li>
+          <li>Rutgers University</li>
+          <li>University of California System</li>
+          <li>University of Chicago</li>
+          <li>University of Southern California</li>
+          <li>University of Texas at Austin</li>
+        </ul>
+      </div>
+      <div class="contact-info-data-info">
+        <h3 class="fs-30">Are you a college or university administrator wanting to learn more?</h3>
+        <p>For help with questions, RFP, or quotes, email <a href="tel:Isaac@fivepointsbenefitplans.com">Isaac@fivepointsbenefitplans.com.</a></p>
+      </div>
+    </div>
+   </div>
   </section>
-    <div class="reconixe-holders">
-          <div
-            class="reconixe-holders"
-            set:html={shoppage.page.aboutStudent.fivePointLetter}
-          />
-        </div>
+  <div class="reconixe-holders">
+    <div
+      class="reconixe-holders"
+      set:html={shoppage.page.aboutStudent.fivePointLetter}
+    />
+  </div>
 </BaseLayout>
